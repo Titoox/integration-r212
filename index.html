@@ -7,389 +7,200 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
+html{-webkit-text-size-adjust:100%;}
 :root{
-  --bg:#0b0c0e;
-  --s1:#111315;
-  --s2:#181a1d;
-  --s3:#1e2124;
-  --border:rgba(255,255,255,0.07);
-  --border2:rgba(255,255,255,0.13);
-  --text:#eceae5;
-  --muted:#6b6a67;
-  --muted2:#9a9896;
-  --accent:#e8b86d;
-  --accent2:#f0cc90;
-  --green:#4d9966;
-  --red:#b85550;
-  --blue:#5585b5;
-  --purple:#8b6bbf;
+  --bg:#0b0c0e;--s1:#111315;--s2:#181a1d;--s3:#1e2124;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#eceae5;--muted:#6b6a67;--muted2:#9a9896;
+  --accent:#e8b86d;--accent2:#f0cc90;
+  --green:#4d9966;--red:#b85550;--blue:#5585b5;--purple:#8b6bbf;--orange:#c97b3a;
 }
-
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Syne',sans-serif;
-  min-height:100vh;
-  overflow-x:hidden;
-}
-
-/* NAV */
-nav{
-  position:sticky;top:0;z-index:100;
-  background:rgba(11,12,14,0.92);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  padding:0 2rem;
-  display:flex;gap:0;align-items:stretch;
-  overflow-x:auto;
-}
-.nav-btn{
-  padding:1rem 1.25rem;
-  background:none;border:none;
-  color:var(--muted2);
-  font-family:'Syne',sans-serif;
-  font-size:0.75rem;font-weight:600;
-  letter-spacing:0.06em;text-transform:uppercase;
-  cursor:pointer;white-space:nowrap;
-  border-bottom:2px solid transparent;
-  transition:all 0.2s;
-}
-.nav-btn:hover{color:var(--text);}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;}
+nav{position:sticky;top:0;z-index:100;background:rgba(11,12,14,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 0.5rem;display:flex;align-items:stretch;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+nav::-webkit-scrollbar{display:none;}
+.nav-btn{padding:0.82rem 0.82rem;background:none;border:none;color:var(--muted2);font-family:'Syne',sans-serif;font-size:0.66rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.2s;-webkit-tap-highlight-color:transparent;}
 .nav-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
-
-/* HEADER */
-.hero{
-  padding:3rem 2.5rem 2rem;
-  border-bottom:1px solid var(--border);
-  position:relative;overflow:hidden;
-}
-.hero::before{
-  content:'R212';
-  position:absolute;right:-1rem;top:-1rem;
-  font-size:12rem;font-weight:800;
-  color:rgba(255,255,255,0.02);
-  font-family:'Syne',sans-serif;
-  pointer-events:none;line-height:1;
-}
-.hero-tag{
-  font-size:0.7rem;font-weight:700;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:0.75rem;
-}
-.hero h1{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(2rem,5vw,3.5rem);
-  font-weight:400;line-height:1.1;
-  margin-bottom:0.75rem;
-}
-.hero p{color:var(--muted2);font-size:0.9rem;max-width:480px;}
-
-/* SECTIONS */
-.section{display:none;padding:2rem 2.5rem 4rem;max-width:1100px;}
+.hero{padding:1.75rem 1rem 1.5rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.hero::before{content:'R212';position:absolute;right:-0.5rem;top:-0.5rem;font-size:7rem;font-weight:800;color:rgba(255,255,255,0.02);font-family:'Syne',sans-serif;pointer-events:none;line-height:1;}
+.hero-tag{font-size:0.63rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(1.5rem,6vw,3.2rem);font-weight:400;line-height:1.1;margin-bottom:0.4rem;}
+.hero p{color:var(--muted2);font-size:0.8rem;line-height:1.5;}
+.section{display:none;padding:1.1rem 0.85rem 5rem;max-width:1100px;margin:0 auto;}
 .section.active{display:block;}
-
-.section-title{
-  font-family:'Instrument Serif',serif;
-  font-size:2rem;font-weight:400;
-  margin-bottom:0.5rem;
-}
-.section-sub{color:var(--muted2);font-size:0.85rem;margin-bottom:2rem;}
-
-/* CARDS GRID */
-.cards-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:1px;
-  background:var(--border);
-  border:1px solid var(--border);
-  border-radius:12px;overflow:hidden;
-  margin-bottom:2rem;
-}
-.card{
-  background:var(--s1);
-  padding:1.5rem;
-  transition:background 0.2s;
-}
-.card:hover{background:var(--s2);}
-.card-label{
-  font-size:0.65rem;font-weight:700;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--accent);margin-bottom:0.5rem;
-}
-.card h3{
-  font-size:0.95rem;font-weight:600;
-  margin-bottom:0.5rem;line-height:1.4;
-}
-.card p{font-size:0.82rem;color:var(--muted2);line-height:1.6;}
-.card code{
-  font-family:'DM Mono',monospace;
-  font-size:0.78rem;
-  background:var(--s3);
-  padding:0.2rem 0.4rem;
-  border-radius:4px;
-  color:var(--accent2);
-}
-
-/* FLASHCARD SECTION — mobile first */
-.fc-container{
-  max-width:520px;margin:0 auto;padding:0 0.1rem;
-}
-.fc-cats{
-  display:flex;gap:0.4rem;flex-wrap:wrap;
-  margin-bottom:0.75rem;
-}
-.fc-cat{
-  padding:0.35rem 0.75rem;
-  border:1px solid var(--border2);border-radius:20px;
-  background:none;color:var(--muted2);
-  font-family:'Syne',sans-serif;
-  font-size:0.7rem;font-weight:600;letter-spacing:0.04em;
-  cursor:pointer;transition:all 0.2s;
-  -webkit-tap-highlight-color:transparent;
-}
-.fc-cat:hover,.fc-cat.active{background:var(--accent);border-color:var(--accent);color:#000;}
-
-.fc-progress{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-bottom:0.6rem;}
+.section-title{font-family:'Instrument Serif',serif;font-size:1.6rem;font-weight:400;margin-bottom:0.35rem;}
+.section-sub{color:var(--muted2);font-size:0.8rem;margin-bottom:1.4rem;}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.4rem;}
+.card{background:var(--s1);padding:1.1rem;}
+.card-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.35rem;}
+.card h3{font-size:0.88rem;font-weight:600;margin-bottom:0.35rem;line-height:1.4;}
+.card p{font-size:0.76rem;color:var(--muted2);line-height:1.55;}
+.card code{font-family:'DM Mono',monospace;font-size:0.72rem;background:var(--s3);padding:0.12rem 0.3rem;border-radius:4px;color:var(--accent2);}
+/* FICHES */
+.fiche{background:var(--s1);border:1px solid var(--border);border-radius:12px;margin-bottom:0.8rem;overflow:hidden;}
+.fiche-header{padding:0.85rem 1.1rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;border-bottom:1px solid transparent;transition:background 0.2s;-webkit-tap-highlight-color:transparent;}
+.fiche-header:active{background:var(--s2);}
+.fiche.open .fiche-header{border-bottom-color:var(--border);}
+.fiche-title{font-weight:600;font-size:0.84rem;flex:1;}
+.fiche-toggle{color:var(--muted);font-size:1rem;transition:transform 0.2s;flex-shrink:0;margin-left:0.5rem;}
+.fiche.open .fiche-toggle{transform:rotate(45deg);}
+.fiche-body{display:none;padding:1.1rem;}
+.fiche.open .fiche-body{display:block;}
+.code-block{background:var(--s3);border:1px solid var(--border2);border-radius:8px;padding:0.8rem 0.9rem;margin:0.6rem 0;font-family:'DM Mono',monospace;font-size:0.7rem;line-height:1.7;color:var(--accent2);overflow-x:auto;white-space:pre;-webkit-overflow-scrolling:touch;}
+.tbl{width:100%;border-collapse:collapse;font-size:0.76rem;margin:0.8rem 0;}
+.tbl th{text-align:left;padding:0.45rem 0.7rem;background:var(--s3);color:var(--accent);font-size:0.63rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1px solid var(--border2);}
+.tbl td{padding:0.45rem 0.7rem;border-bottom:1px solid var(--border);color:var(--muted2);line-height:1.45;}
+.tbl td code{font-family:'DM Mono',monospace;font-size:0.68rem;background:var(--s3);padding:0.1rem 0.28rem;border-radius:3px;color:var(--accent2);}
+p.info{font-size:0.78rem;color:var(--muted2);line-height:1.6;margin:0.4rem 0;}
+strong{color:var(--text);font-weight:600;}
+ul.dot-list{list-style:none;padding:0;}
+ul.dot-list li{padding:0.28rem 0;font-size:0.78rem;color:var(--muted2);line-height:1.5;padding-left:1rem;position:relative;}
+ul.dot-list li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:0.66rem;}
+/* FLASHCARDS */
+.fc-container{max-width:520px;margin:0 auto;}
+.fc-cats{display:flex;gap:0.38rem;flex-wrap:wrap;margin-bottom:0.7rem;}
+.fc-cat{padding:0.28rem 0.65rem;border:1px solid var(--border2);border-radius:20px;background:none;color:var(--muted2);font-family:'Syne',sans-serif;font-size:0.66rem;font-weight:600;letter-spacing:0.04em;cursor:pointer;transition:all 0.2s;-webkit-tap-highlight-color:transparent;}
+.fc-cat.active{background:var(--accent);border-color:var(--accent);color:#000;}
+.fc-progress{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-bottom:0.55rem;}
 .fc-progress-fill{height:100%;background:var(--accent);transition:width 0.3s;}
-
-.fc-stats{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:0.75rem;
-}
-.fc-counter{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--muted2);}
-.fc-stat-ok{font-size:0.82rem;font-weight:700;color:var(--green);}
-.fc-stat-ko{font-size:0.82rem;font-weight:700;color:var(--red);}
-
-.flashcard{
-  perspective:1200px;
-  min-height:200px;cursor:pointer;
-  margin-bottom:0.75rem;
-  -webkit-tap-highlight-color:transparent;
-}
-.fc-inner{
-  width:100%;min-height:200px;
-  position:relative;
-  transform-style:preserve-3d;
-  transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
-}
+.fc-stats{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.7rem;}
+.fc-counter{font-family:'DM Mono',monospace;font-size:0.74rem;color:var(--muted2);}
+.fc-stat-ok{font-size:0.78rem;font-weight:700;color:var(--green);}
+.fc-stat-ko{font-size:0.78rem;font-weight:700;color:var(--red);}
+.flashcard{perspective:1200px;min-height:195px;cursor:pointer;margin-bottom:0.7rem;-webkit-tap-highlight-color:transparent;}
+.fc-inner{width:100%;min-height:195px;position:relative;transform-style:preserve-3d;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);}
 .flashcard.flipped .fc-inner{transform:rotateY(180deg);}
-.fc-front,.fc-back{
-  position:absolute;inset:0;
-  backface-visibility:hidden;
-  border-radius:14px;padding:1.25rem;
-  display:flex;flex-direction:column;justify-content:center;
-  min-height:200px;
-}
+.fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:13px;padding:1.1rem;display:flex;flex-direction:column;justify-content:center;min-height:195px;}
 .fc-front{background:var(--s2);border:1px solid var(--border2);}
 .fc-back{background:var(--s3);border:1px solid var(--accent);transform:rotateY(180deg);}
-.fc-side-label{
-  font-size:0.58rem;font-weight:700;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:0.6rem;
-}
+.fc-side-label{font-size:0.55rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem;}
 .fc-back .fc-side-label{color:var(--accent);}
-.fc-question{font-family:'Instrument Serif',serif;font-size:1.15rem;line-height:1.4;}
-.fc-answer{font-size:0.81rem;line-height:1.7;color:var(--text);overflow-y:auto;max-height:190px;}
-.fc-answer code{
-  font-family:'DM Mono',monospace;font-size:0.74rem;
-  background:rgba(255,255,255,0.06);
-  padding:0.15rem 0.35rem;border-radius:4px;color:var(--accent2);
-}
-.fc-hint{margin-top:0.75rem;font-size:0.65rem;color:var(--muted);text-align:center;}
-
-/* Boutons je sais / je sais pas */
-.fc-judge{display:none;gap:0.6rem;margin-bottom:1rem;}
+.fc-question{font-family:'Instrument Serif',serif;font-size:1.08rem;line-height:1.4;}
+.fc-answer{font-size:0.77rem;line-height:1.7;color:var(--text);overflow-y:auto;max-height:170px;}
+.fc-answer code{font-family:'DM Mono',monospace;font-size:0.7rem;background:rgba(255,255,255,0.06);padding:0.1rem 0.28rem;border-radius:4px;color:var(--accent2);}
+.fc-hint{margin-top:0.65rem;font-size:0.6rem;color:var(--muted);text-align:center;}
+.fc-judge{display:none;gap:0.55rem;margin-bottom:0.9rem;}
 .fc-judge.visible{display:flex;}
-.fc-judge-btn{
-  flex:1;padding:0.9rem 0.5rem;
-  border:none;border-radius:12px;
-  font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;
-  cursor:pointer;transition:transform 0.1s;
-  -webkit-tap-highlight-color:transparent;
-}
+.fc-judge-btn{flex:1;padding:0.82rem 0.5rem;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:transform 0.1s;-webkit-tap-highlight-color:transparent;}
 .fc-judge-btn:active{transform:scale(0.96);}
 .fc-judge-no{background:var(--red);color:#fff;}
 .fc-judge-yes{background:var(--green);color:#fff;}
-
-/* Écran de fin */
-.fc-end{display:none;flex-direction:column;align-items:center;padding:2rem 0.5rem;text-align:center;}
+.fc-end{display:none;flex-direction:column;align-items:center;padding:1.75rem 0.5rem;text-align:center;}
 .fc-end.visible{display:flex;}
-.fc-end-title{font-family:'Instrument Serif',serif;font-size:2rem;margin-bottom:1.25rem;}
-.fc-end-scores{display:flex;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap;justify-content:center;}
-.fc-end-score{padding:0.9rem 1.5rem;border-radius:12px;font-size:1.3rem;font-weight:700;}
+.fc-end-title{font-family:'Instrument Serif',serif;font-size:1.7rem;margin-bottom:1.1rem;}
+.fc-end-scores{display:flex;gap:0.65rem;margin-bottom:1.3rem;flex-wrap:wrap;justify-content:center;}
+.fc-end-score{padding:0.8rem 1.3rem;border-radius:12px;font-size:1.15rem;font-weight:700;}
 .fc-end-score.ok{background:rgba(77,153,102,0.15);color:var(--green);}
 .fc-end-score.ko{background:rgba(184,85,80,0.15);color:var(--red);}
-.fc-end-actions{display:flex;flex-direction:column;gap:0.6rem;width:100%;}
-.fc-end-btn{
-  padding:1rem;border:none;border-radius:12px;
-  font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;
-  cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-}
+.fc-end-actions{display:flex;flex-direction:column;gap:0.5rem;width:100%;}
+.fc-end-btn{padding:0.85rem;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .fc-end-btn:active{opacity:0.8;}
 .fc-end-btn.retry{background:var(--red);color:#fff;}
 .fc-end-btn.restart{background:var(--s3);color:var(--text);border:1px solid var(--border2);}
 #btn-retry:disabled{opacity:0.35;cursor:default;}
-
-@media(min-width:520px){
-  .fc-question{font-size:1.35rem;}
-  .fc-front,.fc-back,.fc-inner,.flashcard{min-height:240px;}
-  .fc-judge-btn{font-size:1.05rem;padding:1rem;}
+/* ════════════════════════════════
+   QCM
+════════════════════════════════ */
+.qcm-container{max-width:640px;margin:0 auto;}
+.qcm-topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:0.75rem;flex-wrap:wrap;background:var(--s2);border:1px solid var(--border2);border-radius:10px;padding:0.85rem 1rem;margin-bottom:1.2rem;}
+.qcm-score-wrap{display:flex;align-items:baseline;gap:0.45rem;margin-bottom:0.4rem;}
+.qcm-score-num{font-family:'DM Mono',monospace;font-size:1.25rem;font-weight:500;color:var(--accent);}
+.qcm-score-label{font-size:0.7rem;color:var(--muted2);}
+.qcm-progress-wrap{width:160px;height:3px;background:var(--s3);border-radius:2px;overflow:hidden;}
+.qcm-progress-bar{height:100%;background:var(--accent);transition:width 0.35s;border-radius:2px;}
+.qcm-controls{display:flex;gap:0.45rem;flex-wrap:wrap;}
+.qcm-ctrl-btn{padding:0.35rem 0.75rem;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--muted2);font-family:'Syne',sans-serif;font-size:0.66rem;font-weight:600;cursor:pointer;white-space:nowrap;-webkit-tap-highlight-color:transparent;}
+.qcm-ctrl-btn:active{border-color:var(--accent);color:var(--accent);}
+/* carte */
+.qcm-card{background:var(--s1);border:1px solid var(--border);border-radius:13px;overflow:hidden;margin-bottom:0.9rem;transition:border-color 0.2s;}
+.qcm-card.card-ok{border-color:var(--green);}
+.qcm-card.card-ko{border-color:var(--red);}
+.qcm-card-head{padding:0.85rem 0.95rem 0.6rem;}
+.qcm-qnum{font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:0.3rem;}
+.qcm-qtext{font-size:0.86rem;line-height:1.55;color:var(--text);}
+/* options */
+.qcm-opts{padding:0.3rem 0.8rem 0.8rem;display:flex;flex-direction:column;gap:0.32rem;}
+.qcm-opt{display:flex;align-items:flex-start;gap:0.6rem;padding:0.65rem 0.8rem;border:1px solid var(--border);border-radius:10px;background:var(--s2);cursor:pointer;transition:border-color 0.12s,background 0.12s;-webkit-tap-highlight-color:transparent;user-select:none;}
+.qcm-opt:active:not(.disabled){background:var(--s3);}
+.qcm-opt.disabled{cursor:default;pointer-events:none;}
+.qcm-opt-letter{width:21px;height:21px;flex-shrink:0;border-radius:5px;border:1px solid var(--border2);background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:0.62rem;font-weight:700;color:var(--muted2);margin-top:1px;transition:all 0.12s;}
+.qcm-opt-text{font-size:0.8rem;line-height:1.5;flex:1;word-break:break-word;}
+.qcm-opt-text.mono{font-family:'DM Mono',monospace;font-size:0.72rem;}
+/* états */
+.qcm-opt.opt-correct{border-color:var(--green);background:rgba(77,153,102,0.09);}
+.qcm-opt.opt-correct .qcm-opt-letter{background:var(--green);border-color:var(--green);color:#fff;}
+.qcm-opt.opt-wrong{border-color:var(--red);background:rgba(184,85,80,0.09);}
+.qcm-opt.opt-wrong .qcm-opt-letter{background:var(--red);border-color:var(--red);color:#fff;}
+.qcm-opt.opt-missed{border-color:var(--orange);background:rgba(201,123,58,0.07);}
+.qcm-opt.opt-missed .qcm-opt-letter{background:var(--orange);border-color:var(--orange);color:#fff;}
+/* explication */
+.qcm-exp{display:none;margin:0 0.8rem 0.8rem;border-radius:10px;padding:0.8rem;font-size:0.77rem;line-height:1.65;}
+.qcm-exp.visible{display:block;}
+.qcm-exp-ok{background:rgba(77,153,102,0.07);border:1px solid rgba(77,153,102,0.2);color:#aad4b5;}
+.qcm-exp-ko{background:rgba(184,85,80,0.07);border:1px solid rgba(184,85,80,0.2);color:#d4a5a3;}
+.qcm-exp-badge{font-weight:700;display:block;margin-bottom:0.38rem;font-size:0.78rem;}
+.qcm-exp-badge.ok{color:var(--green);}
+.qcm-exp-badge.ko{color:var(--red);}
+.qcm-exp code{font-family:'DM Mono',monospace;font-size:0.7rem;background:rgba(255,255,255,0.07);padding:0.1rem 0.28rem;border-radius:4px;color:var(--accent2);}
+/* bouton suivant */
+.qcm-next{display:none;width:calc(100% - 1.6rem);margin:0 0.8rem 0.8rem;padding:0.8rem;border:none;border-radius:10px;background:var(--accent);color:#000;font-family:'Syne',sans-serif;font-size:0.86rem;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.qcm-next.visible{display:block;}
+.qcm-next:active{opacity:0.85;}
+/* fin QCM */
+.qcm-end{display:none;flex-direction:column;align-items:center;padding:1.75rem 1rem;text-align:center;background:var(--s1);border:1px solid var(--border);border-radius:13px;margin-top:1rem;}
+.qcm-end.visible{display:flex;}
+.qcm-end-title{font-family:'Instrument Serif',serif;font-size:1.8rem;margin-bottom:0.4rem;}
+.qcm-end-sub{color:var(--muted2);font-size:0.78rem;margin-bottom:1.3rem;}
+.qcm-end-scores{display:flex;gap:0.65rem;margin-bottom:1.4rem;flex-wrap:wrap;justify-content:center;}
+.qcm-end-score{padding:0.8rem 1.3rem;border-radius:12px;font-size:1.15rem;font-weight:700;}
+.qcm-end-score.ok{background:rgba(77,153,102,0.15);color:var(--green);}
+.qcm-end-score.ko{background:rgba(184,85,80,0.15);color:var(--red);}
+.qcm-end-actions{display:flex;flex-direction:column;gap:0.5rem;width:100%;}
+.qcm-end-btn{padding:0.85rem;border:none;border-radius:12px;font-family:'Syne',sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;-webkit-tap-highlight-color:transparent;}
+.qcm-end-btn:active{opacity:0.8;}
+.qcm-end-btn.restart{background:var(--accent);color:#000;}
+.qcm-end-btn.retry-err{background:var(--s3);color:var(--text);border:1px solid var(--border2);}
+.qcm-end-btn:disabled{opacity:0.35;cursor:default;}
+/* niveaux QCM */
+.qcm-levels{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;}
+.qcm-lvl-btn{
+  flex:1;min-width:140px;
+  padding:0.75rem 1rem;
+  border:1px solid var(--border2);border-radius:10px;
+  background:var(--s2);cursor:pointer;text-align:left;
+  transition:all 0.2s;-webkit-tap-highlight-color:transparent;
 }
-
-/* FC STATS */
-.fc-stats{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:1rem;padding:0 0.25rem;
+.qcm-lvl-btn.active{border-color:var(--accent);background:rgba(232,184,109,0.08);}
+.qcm-lvl-btn:active{opacity:0.8;}
+.lvl-title{display:block;font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;color:var(--text);margin-bottom:0.2rem;}
+.lvl-sub{display:block;font-size:0.68rem;color:var(--muted2);}
+.qcm-lvl-btn.active .lvl-title{color:var(--accent);}
+/* code block dans question QCM */
+.qcm-code{
+  background:var(--s3);border:1px solid var(--border2);
+  border-radius:8px;padding:0.7rem 0.85rem;
+  font-family:'DM Mono',monospace;font-size:0.68rem;
+  line-height:1.7;color:var(--accent2);
+  overflow-x:auto;white-space:pre;
+  margin:0.6rem 0 0;
+  -webkit-overflow-scrolling:touch;
 }
-.fc-stat-ok{font-size:0.85rem;font-weight:700;color:var(--green);}
-.fc-stat-ko{font-size:0.85rem;font-weight:700;color:var(--red);}
-
-/* BOUTONS JE SAIS / JE SAIS PAS */
-.fc-judge{
-  display:none;
-  gap:0.75rem;
-  margin-bottom:1.5rem;
+/* desktop */
+@media(min-width:600px){
+  nav{padding:0 1.25rem;}
+  .nav-btn{padding:0.95rem 1rem;font-size:0.7rem;}
+  .hero{padding:2.25rem 1.75rem 1.75rem;}
+  .section{padding:1.5rem 1.5rem 5rem;}
+  .fc-question{font-size:1.25rem;}
+  .fc-front,.fc-back,.fc-inner,.flashcard{min-height:230px;}
+  .qcm-opt{padding:0.72rem 0.95rem;}
+  .qcm-opt-text{font-size:0.83rem;}
+  .qcm-opt-text.mono{font-size:0.75rem;}
+  .qcm-progress-wrap{width:200px;}
+  .qcm-code{font-size:0.72rem;}
 }
-.fc-judge.visible{display:flex;}
-.fc-judge-btn{
-  flex:1;
-  padding:1rem;
-  border:none;border-radius:12px;
-  font-family:'Syne',sans-serif;
-  font-size:1rem;font-weight:700;
-  cursor:pointer;transition:opacity 0.15s, transform 0.1s;
-  -webkit-tap-highlight-color:transparent;
-}
-.fc-judge-btn:active{transform:scale(0.97);}
-.fc-judge-no{background:var(--red);color:#fff;}
-.fc-judge-yes{background:var(--green);color:#fff;}
-
-/* ÉCRAN DE FIN */
-.fc-end{
-  display:none;
-  flex-direction:column;align-items:center;
-  padding:2rem 1rem;text-align:center;
-}
-.fc-end.visible{display:flex;}
-.fc-end-title{
-  font-family:'Instrument Serif',serif;
-  font-size:2rem;margin-bottom:1.5rem;
-}
-.fc-end-scores{
-  display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;justify-content:center;
-}
-.fc-end-score{
-  padding:1rem 2rem;border-radius:12px;
-  font-size:1.5rem;font-weight:700;
-}
-.fc-end-score.ok{background:rgba(77,153,102,0.15);color:var(--green);}
-.fc-end-score.ko{background:rgba(184,85,80,0.15);color:var(--red);}
-.fc-end-actions{display:flex;flex-direction:column;gap:0.75rem;width:100%;max-width:320px;}
-.fc-end-btn{
-  padding:1rem;border:none;border-radius:12px;
-  font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;
-  cursor:pointer;transition:opacity 0.2s;
-}
-.fc-end-btn:active{opacity:0.8;}
-.fc-end-btn.retry{background:var(--red);color:#fff;}
-.fc-end-btn.restart{background:var(--s3);color:var(--text);border:1px solid var(--border2);}
-#btn-retry:disabled{opacity:0.35;cursor:default;}
-
-/* FICHES */
-.fiche{
-  background:var(--s1);
-  border:1px solid var(--border);
-  border-radius:12px;
-  margin-bottom:1rem;
-  overflow:hidden;
-}
-.fiche-header{
-  padding:1rem 1.5rem;
-  display:flex;align-items:center;justify-content:space-between;
-  cursor:pointer;
-  border-bottom:1px solid transparent;
-  transition:background 0.2s;
-}
-.fiche-header:hover{background:var(--s2);}
-.fiche.open .fiche-header{border-bottom-color:var(--border);}
-.fiche-title{font-weight:600;font-size:0.9rem;}
-.fiche-toggle{
-  color:var(--muted);font-size:1.2rem;
-  transition:transform 0.2s;
-}
-.fiche.open .fiche-toggle{transform:rotate(45deg);}
-.fiche-body{
-  display:none;
-  padding:1.5rem;
-}
-.fiche.open .fiche-body{display:block;}
-
-/* SYNTAX BLOCKS */
-.code-block{
-  background:var(--s3);
-  border:1px solid var(--border2);
-  border-radius:8px;
-  padding:1rem 1.25rem;
-  margin:0.75rem 0;
-  font-family:'DM Mono',monospace;
-  font-size:0.78rem;line-height:1.7;
-  color:var(--accent2);
-  overflow-x:auto;
-  white-space:pre;
-}
-
-/* TABLES */
-.tbl{
-  width:100%;border-collapse:collapse;
-  font-size:0.82rem;margin:1rem 0;
-}
-.tbl th{
-  text-align:left;padding:0.6rem 1rem;
-  background:var(--s3);color:var(--accent);
-  font-size:0.7rem;font-weight:700;
-  letter-spacing:0.06em;text-transform:uppercase;
-  border-bottom:1px solid var(--border2);
-}
-.tbl td{
-  padding:0.6rem 1rem;
-  border-bottom:1px solid var(--border);
-  color:var(--muted2);line-height:1.5;
-}
-.tbl tr:hover td{background:var(--s2);color:var(--text);}
-
-.tag{
-  display:inline-block;
-  padding:0.15rem 0.5rem;
-  border-radius:4px;
-  font-size:0.7rem;font-weight:700;
-  font-family:'DM Mono',monospace;
-}
-.tag-grid{background:rgba(90,133,181,0.15);color:var(--blue);}
-.tag-flex{background:rgba(77,153,102,0.15);color:var(--green);}
-.tag-js{background:rgba(232,184,109,0.15);color:var(--accent);}
-.tag-css{background:rgba(139,107,191,0.15);color:var(--purple);}
-
-p.info{
-  font-size:0.82rem;color:var(--muted2);
-  line-height:1.65;margin:0.5rem 0;
-}
-strong{color:var(--text);font-weight:600;}
-
-ul.dot-list{
-  list-style:none;padding:0;
-}
-ul.dot-list li{
-  padding:0.35rem 0;
-  font-size:0.82rem;color:var(--muted2);
-  line-height:1.5;
-  padding-left:1rem;position:relative;
-}
-ul.dot-list li::before{
-  content:'→';
-  position:absolute;left:0;
-  color:var(--accent);font-size:0.7rem;
+@media(min-width:900px){
+  .hero{padding:2.75rem 2.5rem 2rem;}
+  .section{padding:1.75rem 2.5rem 5rem;}
 }
 </style>
 </head>
@@ -402,53 +213,27 @@ ul.dot-list li::before{
   <button class="nav-btn" onclick="showSection('js',this)">JavaScript</button>
   <button class="nav-btn" onclick="showSection('tds',this)">TDs / TP</button>
   <button class="nav-btn" onclick="showSection('flashcards',this)">Flashcards</button>
+  <button class="nav-btn" onclick="showSection('qcm',this)">⚡ QCM</button>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-tag">R212 — Intégration Web · Examen demain</div>
   <h1>Responsive, Grid CSS<br>& JavaScript</h1>
   <p>L'essentiel condensé : médias queries, CSS Grid, JS DOM, TP calculatrice et quiz.</p>
 </div>
 
-<!-- ======= ACCUEIL ======= -->
+<!-- ACCUEIL -->
 <section class="section active" id="accueil">
   <div class="section-title">Vue d'ensemble</div>
   <div class="section-sub">3 grands thèmes — clique sur un onglet pour le détail.</div>
-
   <div class="cards-grid">
-    <div class="card">
-      <div class="card-label">Thème 1</div>
-      <h3>Responsive & Media Queries</h3>
-      <p>Adapter le site à toutes les résolutions via <code>@media</code>. Mobile First. Viewport. Breakpoints.</p>
-    </div>
-    <div class="card">
-      <div class="card-label">Thème 2</div>
-      <h3>CSS Grid Layout</h3>
-      <p>Grille bidimensionnelle. <code>grid-template-columns</code>, <code>fr</code>, <code>repeat()</code>, <code>minmax()</code>, placement des zones.</p>
-    </div>
-    <div class="card">
-      <div class="card-label">Thème 3</div>
-      <h3>JavaScript DOM</h3>
-      <p>Sélecteurs, événements, manipulation du HTML, <code>data-*</code>, fonctions, tableaux JSON, boucles.</p>
-    </div>
-    <div class="card">
-      <div class="card-label">TP</div>
-      <h3>Calculatrice</h3>
-      <p>Grid 4×6, <code>data-number</code>, <code>data-operation</code>, <code>addEventListener</code>, <code>innerText</code>.</p>
-    </div>
-    <div class="card">
-      <div class="card-label">TP</div>
-      <h3>Quiz interactif</h3>
-      <p>Tableau JSON de questions, <code>classList</code>, <code>createElement</code>, <code>dataset</code>, gestion de l'index courant.</p>
-    </div>
-    <div class="card">
-      <div class="card-label">TD</div>
-      <h3>Monopoly Grid</h3>
-      <p>Grille 5×5, <code>nth-child()</code>, <code>grid-row</code> / <code>grid-column</code>, centrage Flexbox.</p>
-    </div>
+    <div class="card"><div class="card-label">Thème 1</div><h3>Responsive & Media Queries</h3><p>Adapter le site à toutes les résolutions via <code>@media</code>. Mobile First. Viewport. Breakpoints.</p></div>
+    <div class="card"><div class="card-label">Thème 2</div><h3>CSS Grid Layout</h3><p>Grille bidimensionnelle. <code>grid-template-columns</code>, <code>fr</code>, <code>repeat()</code>, <code>minmax()</code>, placement des zones.</p></div>
+    <div class="card"><div class="card-label">Thème 3</div><h3>JavaScript DOM</h3><p>Sélecteurs, événements, manipulation du HTML, <code>data-*</code>, fonctions, tableaux JSON, boucles.</p></div>
+    <div class="card"><div class="card-label">TP</div><h3>Calculatrice</h3><p>Grid 4×6, <code>data-number</code>, <code>data-operation</code>, <code>addEventListener</code>, <code>innerText</code>.</p></div>
+    <div class="card"><div class="card-label">TP</div><h3>Quiz interactif</h3><p>Tableau JSON de questions, <code>classList</code>, <code>createElement</code>, <code>dataset</code>, gestion de l'index courant.</p></div>
+    <div class="card"><div class="card-label">TD</div><h3>Monopoly Grid</h3><p>Grille 5×5, <code>nth-child()</code>, <code>grid-row</code> / <code>grid-column</code>, centrage Flexbox.</p></div>
   </div>
-
   <table class="tbl">
     <thead><tr><th>Propriété</th><th>Flexbox</th><th>Grid</th></tr></thead>
     <tbody>
@@ -460,656 +245,144 @@ ul.dot-list li::before{
   </table>
 </section>
 
-<!-- ======= RESPONSIVE ======= -->
+<!-- RESPONSIVE -->
 <section class="section" id="responsive">
   <div class="section-title">Responsive & Media Queries</div>
   <div class="section-sub">Adapter l'affichage selon la taille d'écran.</div>
-
-  <div class="fiche open">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">C'est quoi le responsive ?</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <p class="info">Adapter le design du site à la taille de l'écran de l'utilisateur. On distingue <strong>Mobile, Tablette, PC, TV</strong>.</p>
-      <p class="info"><strong>Mobile First</strong> : on développe d'abord pour le mobile (le plus contraignant), puis on enrichit pour les grands écrans.</p>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Breakpoints principaux</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <table class="tbl">
-        <thead><tr><th>Résolution</th><th>Cible</th></tr></thead>
-        <tbody>
-          <tr><td>&lt; 480 / 576px</td><td>Mobile</td></tr>
-          <tr><td>≥ 768px</td><td>Tablette</td></tr>
-          <tr><td>≥ 960px</td><td>Desktop</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Syntaxe @media</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">@media screen and (max-width: 576px) {
-  /* styles mobile */
-}
-
-@media screen and (min-width: 576px) {
-  /* styles tablette */
-}
-
-@media screen and (min-width: 960px) {
-  /* styles desktop */
-}</div>
-      <p class="info"><strong>max-width</strong> = "jusqu'à cette taille". <strong>min-width</strong> = "à partir de cette taille".</p>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Le viewport — balise meta indispensable</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <p class="info">Les mobiles dézooment par défaut pour afficher le site. Sans la balise viewport, tes media queries ne fonctionneront pas sur mobile.</p>
-      <div class="code-block">&lt;meta name="viewport" content="width=device-width"&gt;</div>
-      <p class="info">Le <strong>CSS pixel ratio</strong> : un pixel CSS ≠ un pixel physique. Un iPhone Retina a un ratio de 2 (640px physiques = 320px CSS).</p>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Règles @media disponibles</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <ul class="dot-list">
-        <li><strong>width / height</strong> — largeur/hauteur du viewport</li>
-        <li><strong>orientation</strong> — portrait ou landscape</li>
-        <li><strong>media screen / print</strong> — type d'affichage</li>
-        <li><strong>prefers-color-scheme</strong> — mode clair/sombre</li>
-        <li><strong>device-width / device-height</strong> — dimensions physiques</li>
-      </ul>
-    </div>
-  </div>
+  <div class="fiche open"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">C'est quoi le responsive ?</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><p class="info">Adapter le design du site à la taille de l'écran. <strong>Mobile First</strong> : d'abord pour mobile, puis on enrichit pour les grands écrans.</p></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">Breakpoints principaux</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><table class="tbl"><thead><tr><th>Résolution</th><th>Cible</th></tr></thead><tbody><tr><td>&lt; 480/576px</td><td>Mobile</td></tr><tr><td>≥ 768px</td><td>Tablette</td></tr><tr><td>≥ 960px</td><td>Desktop</td></tr></tbody></table></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">Syntaxe @media</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">@media screen and (max-width: 576px) { /* mobile */ }
+@media screen and (min-width: 768px) { /* tablette */ }
+@media screen and (min-width: 960px) { /* desktop */ }</div>
+    <p class="info"><strong>max-width</strong> = jusqu'à cette taille. <strong>min-width</strong> = à partir de cette taille.</p></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">Viewport — balise meta indispensable</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">&lt;meta name="viewport" content="width=device-width"&gt;</div>
+    <p class="info">Sans elle, le navigateur mobile dézoome et ignore les media queries. CSS pixel ratio : 1px CSS ≠ 1px physique.</p></div></div>
 </section>
 
-<!-- ======= GRID ======= -->
+<!-- GRID -->
 <section class="section" id="grid">
   <div class="section-title">CSS Grid Layout</div>
   <div class="section-sub">Mise en page bidimensionnelle. Conteneur + enfants.</div>
-
-  <div class="fiche open">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Activer la grille</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">.conteneur {
+  <div class="fiche open"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">Activer la grille + fr + repeat()</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">.conteneur {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;   /* 3 colonnes égales */
-  grid-template-rows: 100px 100px;       /* 2 lignes de 100px */
-  gap: 16px;                             /* gouttière */
-}</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">L'unité fr et repeat()</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <p class="info"><strong>fr</strong> = fraction de l'espace disponible.</p>
-      <div class="code-block">/* 3 colonnes égales */
-grid-template-columns: 1fr 1fr 1fr;
-/* Raccourci avec repeat() */
-grid-template-columns: repeat(3, 1fr);
-
-/* Mix : colonne fixe + flexible */
-grid-template-columns: 200px repeat(3, 1fr);
-
-/* Auto-remplissage responsive */
-grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">minmax() — taille min et max</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">/* Colonne entre 100px et 300px */
-grid-template-columns: minmax(100px, 300px);
-
-/* Ligne : min 120px, s'adapte au contenu */
-grid-template-rows: minmax(120px, auto);</div>
-      <p class="info">Utilisé dans le TP calculatrice pour l'écran d'affichage : <code>minmax(120px, auto)</code>.</p>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Placer les éléments — span, grid-column, grid-row</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">/* Occuper 2 colonnes d'affilée */
-.mon-element { grid-column: span 2; }
-
-/* Occuper 4 colonnes : calculatrice display */
-.display { grid-column: span 4; }
-
-/* Placement précis */
-.element {
-  grid-column: 1 / 3;  /* de la ligne 1 à 3 */
-  grid-row: 2 / 4;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
-
-/* nth-child — sélectionner le 5e élément */
-li:nth-child(5) { grid-column: 2 / 4; }</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Gouttières (gap)</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">gap: 16px;              /* lignes et colonnes */
-row-gap: 10px;          /* entre les lignes seulement */
-column-gap: 20px;       /* entre les colonnes seulement */</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Zones nommées — grid-area</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">/* Sur le conteneur */
-.conteneur {
-  display: grid;
-  grid-template-areas:
-    "header header"
-    "section aside"
-    "footer footer";
+/* Responsive sans media query */
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));</div></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">span, grid-column, nth-child</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">/* 2 colonnes */        .el { grid-column: span 2; }
+/* de col 1 à 3 */     .el { grid-column: 1 / 3; }
+/* 3e enfant */        li:nth-child(3) { grid-column: span 2; }</div></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">grid-area — zones nommées</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">.conteneur {
+  grid-template-areas: "header header" "main aside" "footer footer";
 }
-
-/* Sur chaque enfant */
-header  { grid-area: header; }
-section { grid-area: section; }
-aside   { grid-area: aside; }
-footer  { grid-area: footer; }</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Alignement dans la grille</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <table class="tbl">
-        <thead><tr><th>Propriété</th><th>S'applique à</th><th>Effet</th></tr></thead>
-        <tbody>
-          <tr><td><code>justify-items</code></td><td>conteneur</td><td>alignement horizontal des enfants</td></tr>
-          <tr><td><code>align-items</code></td><td>conteneur</td><td>alignement vertical des enfants</td></tr>
-          <tr><td><code>justify-content</code></td><td>conteneur</td><td>distribution horizontale de la grille</td></tr>
-          <tr><td><code>align-content</code></td><td>conteneur</td><td>distribution verticale de la grille</td></tr>
-          <tr><td><code>justify-self</code></td><td>enfant</td><td>alignement horizontal d'un enfant</td></tr>
-          <tr><td><code>align-self</code></td><td>enfant</td><td>alignement vertical d'un enfant</td></tr>
-        </tbody>
-      </table>
-      <div class="code-block">/* Centrer dans une cellule = Flexbox sur l'enfant */
-.cellule {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">TP Calculatrice — structure Grid</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <p class="info">Grille <strong>4 colonnes × 6 lignes</strong>. Colonnes et lignes de 100px. Affichage : <code>minmax(120px, auto)</code>.</p>
-      <div class="code-block">#calc-grid {
+header { grid-area: header; }
+main   { grid-area: main; }</div></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">TP Calculatrice — structure Grid</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">#calc-grid {
   display: grid;
   grid-template-columns: repeat(4, 100px);
   grid-template-rows: minmax(120px, auto) repeat(5, 100px);
   gap: 4px;
 }
-
-/* L'affichage prend toute la largeur */
-.display {
-  grid-column: span 4;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* texte à droite */
-}
-
-/* Touche AC et = : span 2 */
-.span-two { grid-column: span 2; }</div>
-    </div>
-  </div>
+.display  { grid-column: span 4; }
+.span-two { grid-column: span 2; }</div></div></div>
 </section>
 
-<!-- ======= JAVASCRIPT ======= -->
+<!-- JAVASCRIPT -->
 <section class="section" id="js">
   <div class="section-title">JavaScript — DOM & Events</div>
-  <div class="section-sub">Variables, fonctions, sélecteurs, événements, JSON.</div>
-
-  <div class="fiche open">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Variables et constantes</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">const nom = "Mario";   // ne change jamais
-let age = 39;          // peut changer
-
-console.log(nom + " a " + age + " ans");
-// → Mario a 39 ans</div>
-      <ul class="dot-list">
-        <li>Commence par une lettre ou <code>_</code>, pas de chiffre ni caractère spécial</li>
-        <li>camelCase pour les variables : <code>nomDeLaVariable</code></li>
-        <li>SCREAMING_SNAKE_CASE pour les constantes importantes</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Sélecteurs DOM</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">// Par ID → un seul élément
-const btn = document.getElementById('mon-btn');
-
-// Par classe → plusieurs éléments
-const items = document.getElementsByClassName('item');
-
-// Par sélecteur CSS → un seul
-const el = document.querySelector('.ma-classe');
-const el2 = document.querySelector('[data-output]');
-
-// Par sélecteur CSS → tous
-const tous = document.querySelectorAll('[data-number]');</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">data-* — attributs de données</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">/* HTML */
-&lt;button data-number&gt;1&lt;/button&gt;
-&lt;div data-output&gt;&lt;/div&gt;
-&lt;button data-correct="true"&gt;Bonne réponse&lt;/button&gt;
-
-/* JS — sélectionner par data-* */
-const nums = document.querySelectorAll('[data-number]');
-const output = document.querySelector('[data-output]');
-
-/* Lire/écrire une valeur data-* */
-button.dataset.correct     // lire
-button.dataset.correct = true; // écrire</div>
-      <p class="info">Préféré aux classes CSS pour les rôles fonctionnels. Ne mélange pas sémantique CSS et sémantique JS.</p>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">addEventListener & events</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">const btn = document.querySelector('#mon-btn');
-
-// Syntaxe basique
-btn.addEventListener('click', function() {
-  console.log('cliqué');
+  <div class="section-sub">Variables, sélecteurs, événements, JSON.</div>
+  <div class="fiche open"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">Sélecteurs DOM + data-*</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">document.getElementById('btn')
+document.querySelector('[data-output]')      // un seul
+document.querySelectorAll('[data-number]')   // tous → NodeList
+button.dataset.correct        // lire
+button.dataset.correct = true // écrire</div></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">addEventListener & manipulation DOM</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">btn.addEventListener('click', (e) => {
+  e.target.innerText = 'nouveau texte';
+  el.classList.add('hide');
+  el.classList.remove('hide');
 });
-
-// Avec arrow function
-btn.addEventListener('click', () => {
-  console.log('cliqué');
-});
-
-// Avec l'événement (e) pour récupérer la cible
-btn.addEventListener('click', (e) => {
-  const cible = e.target;        // l'élément cliqué
-  console.log(cible.innerText);  // son texte
-});</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">Modifier le HTML : innerText, innerHTML, classList</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">const el = document.querySelector('#monEl');
-
-// Lire ou modifier le texte visible
-el.innerText = 'nouveau texte';
-const texte = el.innerText;
-
-// Modifier le HTML interne (dangereux avec données utilisateur)
-el.innerHTML = '&lt;strong&gt;gras&lt;/strong&gt;';
-el.innerHTML = '';   // vider
-
-// Classes
-el.classList.add('hide');
-el.classList.remove('hide');
-el.classList.toggle('active');
-
-// Créer un élément et l'ajouter
 const btn = document.createElement('button');
-btn.innerText = 'Cliquez';
-btn.classList.add('btn');
-conteneur.appendChild(btn);</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">forEach — parcourir un NodeList ou tableau</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">const boutons = document.querySelectorAll('[data-number]');
-
-boutons.forEach(button => {
-  button.addEventListener('click', () => {
-    console.log(button.innerText);
-  });
+btn.innerText = 'Cliquer';
+conteneur.appendChild(btn);
+element.innerHTML = ''; // vider</div></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">forEach + Array.from + JSON</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">querySelectorAll('[data-number]').forEach(btn => {
+  btn.addEventListener('click', () => { ... });
 });
+Array.from(el.children).forEach(enfant => { ... });
 
-// Array.from() — convertir HTMLCollection en tableau
-Array.from(conteneur.children).forEach(enfant => {
-  // traitement
-});</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">JSON — tableau d'objets</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">const questions = [
-  {
-    enonce: 'Quel est le langage du web côté client ?',
-    reponses: [
-      { texte: 'Python', correcte: false },
-      { texte: 'JavaScript', correcte: true }
-    ]
-  },
-  {
-    enonce: 'Que signifie CSS ?',
-    reponses: [
-      { texte: 'Cascading Style Sheets', correcte: true },
-      { texte: 'Computer Style System', correcte: false }
-    ]
-  }
-];
-
-// Accéder aux données
-questions[0].enonce         // première question
-questions[0].reponses[1].texte  // 'JavaScript'</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">TP Calculatrice — logique JS complète</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">/* Sélecteurs */
-const output = document.querySelector('[data-output]');
-const clearButton = document.querySelector('[data-all-clear]');
-const numberButtons = document.querySelectorAll('[data-number]');
-
-/* Effacer */
-function clear() {
-  output.innerText = '';
+const questions = [{ enonce: '?', reponses: [
+  { texte: 'Bonne', correcte: true }
+]}];</div></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">TP Quiz — setStatusClass + resetState</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">function setStatusClass(el, isCorrect) {
+  el.classList.remove('correct', 'wrong');
+  el.classList.add(isCorrect ? 'correct' : 'wrong');
 }
-clearButton.addEventListener('click', () => { clear(); });
-
-/* Afficher un chiffre */
-function appendNumber(number) {
-  output.innerText = output.innerText + number;
-}
-numberButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    appendNumber(button.innerText);
-  });
-});</div>
-      <p class="info">Rôles à attribuer : <code>data-output</code>, <code>data-number</code>, <code>data-operation</code>, <code>data-equals</code>, <code>data-all-clear</code>.</p>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">TP Quiz — logique JS complète</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">let currentQuestionIndex = 0;
-
-function startGame() {
-  currentQuestionIndex = 0;
-  startButton.classList.add('hide');
-  questionContainer.classList.remove('hide');
-  setNextQuestion();
-}
-
-function setNextQuestion() {
-  resetState();
-  showQuestion(questions[currentQuestionIndex]);
-}
-
-function showQuestion(question) {
-  questionElement.innerText = question.enonce;
-  question.reponses.forEach(reponse => {
-    let btn = document.createElement('button');
-    btn.innerText = reponse.texte;
-    btn.classList.add('btn');
-    if (reponse.correcte) btn.dataset.correct = true;
-    btn.addEventListener('click', selectAnswer);
-    answerButtonsElement.appendChild(btn);
-  });
-}
-
-function selectAnswer(e) {
-  const selectedButton = e.target;
-  const isCorrect = selectedButton.dataset.correct;
-  setStatusClass(document.body, isCorrect);
-  Array.from(answerButtonsElement.children).forEach(button => {
-    setStatusClass(button, button.dataset.correct);
-  });
-  if (questions.length > currentQuestionIndex + 1) {
-    nextButton.classList.remove('hide');
-  } else {
-    startButton.innerText = 'Recommencer';
-    startButton.classList.remove('hide');
-  }
-}
-
-function setStatusClass(element, isCorrect) {
-  element.classList.remove('correct', 'wrong');
-  element.classList.add(isCorrect ? 'correct' : 'wrong');
-}
-
 function resetState() {
   answerButtonsElement.innerHTML = '';
   nextButton.classList.add('hide');
-}</div>
-    </div>
-  </div>
+}</div></div></div>
 </section>
 
-<!-- ======= TDs ======= -->
+<!-- TDs -->
 <section class="section" id="tds">
   <div class="section-title">TDs & TP — Rappels clés</div>
   <div class="section-sub">Tout ce qu'on peut te demander en pratique.</div>
-
-  <div class="fiche open">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">TD1 — Monopoly (Grid 5×5)</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">ol {
+  <div class="fiche open"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">TD1 — Monopoly Grid 5×5</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">ol {
   display: grid;
   grid-template-columns: repeat(5, 100px);
   grid-template-rows: repeat(5, 100px);
-  gap: 4px;
-  list-style: none;
+  gap: 4px; list-style: none;
 }
-
-li { border: 1px solid #333; }
-
-/* Placer le 1er élément colonne 3, lignes 1 à 3 */
-li:nth-child(1) {
-  grid-column: 3;
-  grid-row: 1 / 3;
-}
-
-/* Centrer le contenu dans chaque case */
-li {
+li:nth-child(1) { grid-column: 3; grid-row: 1 / 3; }
+li { display: flex; justify-content: center; align-items: center; }</div></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">Centrage Flexbox vertical + horizontal</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">.wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}</div>
-    </div>
-  </div>
+  justify-content: center; /* horizontal */
+  align-items: center;     /* vertical */
+  min-height: 100vh;
+}</div></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">TD2 — JS : prompt, input.value, textContent</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">const prenom = prompt('Prénom ?');
+alert('Bonjour ' + prenom);
 
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">TD1 — Centrage Flexbox (vertical + horizontal)</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">/* Le parent doit occuper tout l'espace */
-.wrapper {
-  display: flex;
-  justify-content: center;   /* horizontal */
-  align-items: center;       /* vertical */
-  min-height: 100vh;         /* pleine hauteur */
-}
-
-/* Pour centrer aussi le contenu à l'intérieur du bloc */
-.bloc {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">TD2 — JS : prompt, alert, formulaire</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <div class="code-block">/* Ex1 : saluer l'utilisateur */
-const prenom = prompt('Quel est ton prénom ?');
-alert('Bonjour ' + prenom + ' !');
-
-/* Ex2 : calculer une aire */
-function calculerAire(longueur, largeur) {
-  const aire = longueur * largeur;
-  console.log('L\'aire de ' + longueur + ' m x ' + largeur + ' m = ' + aire + ' m²');
-}
-calculerAire(5, 3);
-
-/* Ex3 : aire depuis un formulaire */
-const btnCalcul = document.getElementById('btn-calcul');
 btnCalcul.addEventListener('click', () => {
-  const l = document.getElementById('longueur').value;
-  const w = document.getElementById('largeur').value;
-  calculerAire(Number(l), Number(w));
-});
+  const l = Number(document.getElementById('longueur').value);
+  const w = Number(document.getElementById('largeur').value);
+  document.getElementById('resultat').textContent = l * w + ' m²';
+});</div></div></div>
+  <div class="fiche"><div class="fiche-header" onclick="toggleFiche(this)"><span class="fiche-title">TP site sportif — Grid responsive Mobile First</span><span class="fiche-toggle">+</span></div>
+    <div class="fiche-body"><div class="code-block">/* Mobile : flux normal */
+.articles { display: flex; flex-direction: column; }
 
-/* Bonus : afficher dans le HTML */
-document.getElementById('resultat').textContent = 'Résultat : ' + aire + ' m²';</div>
-    </div>
-  </div>
-
-  <div class="fiche">
-    <div class="fiche-header" onclick="toggleFiche(this)">
-      <span class="fiche-title">TP site sportif — Grid responsive</span>
-      <span class="fiche-toggle">+</span>
-    </div>
-    <div class="fiche-body">
-      <p class="info">Approche Mobile First : pas de grid pour mobile, grid pour tablette+, grid complète pour desktop.</p>
-      <div class="code-block">/* Mobile : flux normal, pas de grid */
-.articles {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Tablette : 2 colonnes */
 @media screen and (min-width: 480px) {
-  .articles {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
+  .articles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 }
-
-/* Desktop : 3 colonnes */
 @media screen and (min-width: 960px) {
-  .articles {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .page {
-    display: grid;
-    grid-template-areas:
-      "header header"
-      "nav nav"
-      "main aside"
-      "footer footer";
-  }
-}</div>
-    </div>
-  </div>
+  .articles { grid-template-columns: repeat(3, 1fr); }
+}</div></div></div>
 </section>
 
-<!-- ======= FLASHCARDS ======= -->
+<!-- FLASHCARDS -->
 <section class="section" id="flashcards">
   <div class="section-title">Flashcards</div>
   <div class="section-sub">Retourne la carte, puis dis si tu savais ou non.</div>
-
   <div class="fc-container">
-
-    <!-- Filtres catégories -->
-    <div class="fc-cats" id="fc-cats">
+    <div class="fc-cats">
       <button class="fc-cat" onclick="filterCat('all',this)">Tout</button>
       <button class="fc-cat active" onclick="filterCat('examen',this)">⚡ Examen</button>
       <button class="fc-cat" onclick="filterCat('responsive',this)">Responsive</button>
@@ -1117,39 +390,22 @@ document.getElementById('resultat').textContent = 'Résultat : ' + aire + ' m²'
       <button class="fc-cat" onclick="filterCat('js',this)">JS</button>
       <button class="fc-cat" onclick="filterCat('tp',this)">TPs</button>
     </div>
-
-    <!-- Barre de progression -->
     <div class="fc-progress"><div class="fc-progress-fill" id="fc-progress-fill"></div></div>
-
-    <!-- Stats -->
     <div class="fc-stats">
       <span class="fc-stat-ok" id="stat-ok">✓ 0</span>
       <span class="fc-counter" id="fc-counter">1 / 41</span>
       <span class="fc-stat-ko" id="stat-ko">✗ 0</span>
     </div>
-
-    <!-- Carte -->
     <div class="flashcard" id="flashcard" onclick="flipCard()">
-      <div class="fc-inner" id="fc-inner">
-        <div class="fc-front">
-          <div class="fc-side-label">Question</div>
-          <div class="fc-question" id="fc-question">Chargement...</div>
-          <div class="fc-hint">Tape pour retourner</div>
-        </div>
-        <div class="fc-back">
-          <div class="fc-side-label">Réponse</div>
-          <div class="fc-answer" id="fc-answer"></div>
-        </div>
+      <div class="fc-inner">
+        <div class="fc-front"><div class="fc-side-label">Question</div><div class="fc-question" id="fc-question">Chargement...</div><div class="fc-hint">Tape pour retourner</div></div>
+        <div class="fc-back"><div class="fc-side-label">Réponse</div><div class="fc-answer" id="fc-answer"></div></div>
       </div>
     </div>
-
-    <!-- Boutons je sais / je sais pas — visibles seulement après retournement -->
     <div class="fc-judge" id="fc-judge">
       <button class="fc-judge-btn fc-judge-no" onclick="judge(false)">✗ Je savais pas</button>
       <button class="fc-judge-btn fc-judge-yes" onclick="judge(true)">✓ Je savais</button>
     </div>
-
-    <!-- Écran de fin -->
     <div class="fc-end" id="fc-end">
       <div class="fc-end-title">Terminé !</div>
       <div class="fc-end-scores">
@@ -1161,12 +417,58 @@ document.getElementById('resultat').textContent = 'Résultat : ' + aire + ' m²'
         <button class="fc-end-btn restart" onclick="restartDeck()">Tout rejouer</button>
       </div>
     </div>
+  </div>
+</section>
 
+<!-- QCM -->
+<section class="section" id="qcm">
+  <div class="section-title">QCM ⚡ Examen</div>
+  <div class="section-sub">Clique directement sur ta réponse — feedback immédiat, explication dans la carte.</div>
+  <div class="qcm-container">
+
+    <!-- Sélecteur de niveau -->
+    <div class="qcm-levels">
+      <button class="qcm-lvl-btn active" id="lvl-btn-1" onclick="switchLevel(1)">
+        <span class="lvl-title">Niveau 1</span>
+        <span class="lvl-sub">Concepts & syntaxe · 34 questions</span>
+      </button>
+      <button class="qcm-lvl-btn" id="lvl-btn-2" onclick="switchLevel(2)">
+        <span class="lvl-title">🔥 Niveau 2</span>
+        <span class="lvl-sub">Lecture de code buggé · 15 questions</span>
+      </button>
+    </div>
+
+    <div class="qcm-topbar">
+      <div>
+        <div class="qcm-score-wrap">
+          <span class="qcm-score-num" id="qcm-score">0</span>
+          <span class="qcm-score-label">/ <span id="qcm-total">0</span> répondues</span>
+        </div>
+        <div class="qcm-progress-wrap"><div class="qcm-progress-bar" id="qcm-progress-bar"></div></div>
+      </div>
+      <div class="qcm-controls">
+        <button class="qcm-ctrl-btn" onclick="qcmRestart()">↺ Recommencer</button>
+        <button class="qcm-ctrl-btn" onclick="qcmShuffle()">⇄ Mélanger</button>
+      </div>
+    </div>
+    <div id="qcm-cards"></div>
+    <div class="qcm-end" id="qcm-end">
+      <div class="qcm-end-title">Quiz terminé !</div>
+      <div class="qcm-end-sub" id="qcm-end-sub"></div>
+      <div class="qcm-end-scores">
+        <div class="qcm-end-score ok" id="qcm-end-ok">0 correctes</div>
+        <div class="qcm-end-score ko" id="qcm-end-ko">0 ratées</div>
+      </div>
+      <div class="qcm-end-actions">
+        <button class="qcm-end-btn restart" onclick="qcmRestart()">↺ Tout recommencer</button>
+        <button class="qcm-end-btn retry-err" id="qcm-btn-retry" onclick="qcmRetryErrors()">↩ Rejouer les erreurs</button>
+      </div>
+    </div>
   </div>
 </section>
 
 <script>
-// ─── NAVIGATION ───────────────────────────────────────
+// ── NAVIGATION ──────────────────────────────────────
 function showSection(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -1174,106 +476,310 @@ function showSection(id, btn) {
   btn.classList.add('active');
   window.scrollTo(0,0);
 }
+function toggleFiche(h) { h.parentElement.classList.toggle('open'); }
 
-// ─── FICHES ACCORDÉON ─────────────────────────────────
-function toggleFiche(header) {
-  const fiche = header.parentElement;
-  fiche.classList.toggle('open');
-}
-
-// ─── FLASHCARDS DATA ──────────────────────────────────
+// ── ALL_CARDS ────────────────────────────────────────
 const ALL_CARDS = [
-
-  // ══ EXAMEN — L'essentiel à connaître par cœur ══
-  {cat:'examen', q:"C'est quoi le responsive web design ?", a:"Adapter le design d'un site à toutes les tailles d'écran (mobile, tablette, desktop) grâce aux media queries CSS."},
-  {cat:'examen', q:"Balise meta OBLIGATOIRE pour que le responsive fonctionne sur mobile ?", a:'<code>&lt;meta name="viewport" content="width=device-width"&gt;</code>\nSans elle, le navigateur mobile dézoome et ignore tes media queries.'},
-  {cat:'examen', q:"Syntaxe d'une media query mobile (max 576px) ?", a:'<code>@media screen and (max-width: 576px) {\n  /* styles mobile */\n}</code>'},
-  {cat:'examen', q:"Syntaxe d'une media query desktop (min 960px) ?", a:'<code>@media screen and (min-width: 960px) {\n  /* styles desktop */\n}</code>'},
-  {cat:'examen', q:"Breakpoints du cours : mobile / tablette / desktop ?", a:"Mobile : &lt; 480–576px\nTablette : ≥ 768px\nDesktop : ≥ 960px"},
-  {cat:'examen', q:"C'est quoi le Mobile First ?", a:"On code d'abord pour mobile (sans media query), puis on enrichit pour les grands écrans avec des <code>min-width</code>."},
-  {cat:'examen', q:"Comment activer CSS Grid sur un conteneur ?", a:'<code>display: grid;</code>'},
-  {cat:'examen', q:"Que veut dire l'unité fr ?", a:"Fraction de l'espace disponible dans la grille.\n<code>1fr 2fr</code> → le 2e prend 2× plus de place que le 1er."},
-  {cat:'examen', q:"Comment créer 4 colonnes égales de 100px avec repeat() ?", a:'<code>grid-template-columns: repeat(4, 100px);</code>'},
-  {cat:'examen', q:"Comment créer une grille responsive sans media query ?", a:'<code>grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));</code>'},
-  {cat:'examen', q:"À quoi sert minmax(120px, auto) ?", a:"Taille minimum 120px, s'étire automatiquement selon le contenu. Utilisé pour l'affichage de la calculatrice."},
-  {cat:'examen', q:"Comment faire qu'un élément occupe 2 colonnes ?", a:'<code>grid-column: span 2;</code>'},
-  {cat:'examen', q:"Comment placer un élément de la colonne 1 à 3 ?", a:'<code>grid-column: 1 / 3;</code>'},
-  {cat:'examen', q:"Comment ajouter une gouttière de 8px dans une grid ?", a:'<code>gap: 8px;</code>\nOu séparément : <code>row-gap</code> / <code>column-gap</code>.'},
-  {cat:'examen', q:"Comment centrer verticalement ET horizontalement dans une cellule ?", a:'<code>display: flex;\njustify-content: center;\nalign-items: center;</code>'},
-  {cat:'examen', q:"Flexbox vs Grid : quelle différence fondamentale ?", a:"Flexbox = 1 dimension (ligne OU colonne).\nGrid = 2 dimensions (lignes ET colonnes simultanément)."},
-  {cat:'examen', q:"Comment nommer des zones de grille avec grid-area ?", a:'Sur le conteneur :\n<code>grid-template-areas: "header header" "main aside";</code>\nSur chaque enfant : <code>grid-area: header;</code>'},
-  {cat:'examen', q:"Comment sélectionner le 3e élément d'une liste en CSS ?", a:'<code>li:nth-child(3) { ... }</code>'},
-  {cat:'examen', q:"const vs let en JavaScript ?", a:"<code>const</code> → valeur fixe, ne peut pas être réassignée.\n<code>let</code> → variable, peut changer."},
-  {cat:'examen', q:"Comment sélectionner UN élément par son attribut data-output ?", a:'<code>document.querySelector(\'[data-output]\')</code>'},
-  {cat:'examen', q:"Comment sélectionner TOUS les [data-number] ?", a:'<code>document.querySelectorAll(\'[data-number]\')</code>\n→ retourne un NodeList, parcourable avec forEach.'},
-  {cat:'examen', q:"Comment écouter un clic sur un bouton ?", a:'<code>btn.addEventListener(\'click\', () => {\n  // action\n});</code>'},
-  {cat:'examen', q:"Comment modifier le texte visible d'un élément en JS ?", a:'Écrire : <code>element.innerText = \'nouveau texte\';</code>\nLire : <code>const texte = element.innerText;</code>'},
-  {cat:'examen', q:"Comment ajouter / supprimer une classe CSS en JS ?", a:'<code>el.classList.add(\'hide\');\nel.classList.remove(\'hide\');\nel.classList.toggle(\'active\');</code>'},
-  {cat:'examen', q:"Pourquoi utiliser defer sur la balise script ?", a:'<code>&lt;script src="main.js" defer&gt;&lt;/script&gt;</code>\nLe script se lance APRÈS le chargement du HTML, évitant les erreurs sur des éléments non encore présents.'},
-  {cat:'examen', q:"C'est quoi data-* et pourquoi l'utiliser à la place des classes ?", a:"<code>data-*</code> sert à porter des rôles/données fonctionnelles (JS).\nLes classes CSS servent au style.\n→ On ne mélange pas les deux."},
-  {cat:'examen', q:"Comment lire / écrire un dataset en JS ?", a:'HTML : <code>data-correct="true"</code>\nLire : <code>button.dataset.correct</code>\nÉcrire : <code>button.dataset.correct = true</code>'},
-  {cat:'examen', q:"Comment créer un élément HTML dynamiquement en JS ?", a:'<code>const btn = document.createElement(\'button\');\nbtn.innerText = \'Cliquer\';\nbtn.classList.add(\'btn\');\nconteneur.appendChild(btn);</code>'},
-  {cat:'examen', q:"Comment vider le contenu HTML d'un élément ?", a:'<code>element.innerHTML = \'\';</code>'},
-  {cat:'examen', q:"Structure d'un tableau JSON de questions pour le TP quiz ?", a:'<code>[{\n  enonce: \'Question ?\',\n  reponses: [\n    { texte: \'Bonne\', correcte: true },\n    { texte: \'Fausse\', correcte: false }\n  ]\n}]</code>'},
-  {cat:'examen', q:"Comment parcourir un NodeList avec forEach ?", a:'<code>const btns = document.querySelectorAll(\'[data-number]\');\nbtns.forEach(btn => {\n  btn.addEventListener(\'click\', () => { ... });\n});</code>'},
-  {cat:'examen', q:"Que fait Array.from(el.children) ?", a:"Convertit une HTMLCollection (non itérable directement) en tableau JS standard, utilisable avec <code>forEach</code>."},
-  {cat:'examen', q:"TP Calculatrice : grille de combien de colonnes et lignes ?", a:"4 colonnes × 6 lignes.\nColonnes et lignes : 100px.\nAffichage (ligne 1) : <code>minmax(120px, auto)</code>."},
-  {cat:'examen', q:"TP Calculatrice : quels sont les 5 data-* à attribuer ?", a:"<code>data-output</code> → écran\n<code>data-number</code> → 0–9 et point\n<code>data-operation</code> → +, −, ×, ÷\n<code>data-equals</code> → =\n<code>data-all-clear</code> → AC"},
-  {cat:'examen', q:"TP Quiz : comment afficher la bonne couleur sur les boutons au clic ?", a:'<code>function setStatusClass(el, isCorrect) {\n  el.classList.remove(\'correct\', \'wrong\');\n  el.classList.add(isCorrect ? \'correct\' : \'wrong\');\n}</code>'},
-
-  // ESSENTIELS MANQUANTS
-  {cat:'examen', q:"Comment activer Flexbox et aligner des éléments sur une ligne avec retour ?", a:'<code>display: flex;\nflex-wrap: wrap;\njustify-content: center; /* horizontal */\nalign-items: center;     /* vertical */</code>'},
-  {cat:'examen', q:"Flexbox : que fait flex-direction: column ?", a:"Les éléments s'empilent verticalement au lieu d'être côte à côte."},
-  {cat:'examen', q:"Analyse Decathlon : comment 3 articles par ligne devient 1 en mobile ?", a:"Conteneur en <code>display: flex; flex-wrap: wrap;</code>, chaque article à <code>width: 33%</code>.\nMedia query mobile → <code>width: 100%</code> → les articles s'empilent."},
-  {cat:'examen', q:"Comment récupérer la valeur d'un champ input en JS ?", a:'<code>const val = document.getElementById(\'mon-input\').value;</code>\nToujours une string → convertir avec <code>Number(val)</code> si calcul numérique.'},
-  {cat:'examen', q:"textContent vs innerText ?", a:"<code>textContent</code> → tout le texte brut du nœud.\n<code>innerText</code> → texte visible uniquement (respecte le CSS).\nPour afficher un résultat dans le HTML : les deux marchent."},
-  {cat:'examen', q:"Comment demander une saisie et afficher une alerte ?", a:'<code>const prenom = prompt(\'Ton prénom ?\');\nalert(\'Bonjour \' + prenom);</code>'},
-
-  // RESPONSIVE (détail)
-  {cat:'responsive', q:"Qu'est-ce que le Mobile First ?", a:"On développe d'abord pour mobile (le plus contraignant), puis on enrichit pour les grands écrans via des <code>min-width</code>."},
-  {cat:'responsive', q:"Quelle balise meta est indispensable pour le responsive mobile ?", a:'<code>&lt;meta name="viewport" content="width=device-width"&gt;</code>\nSans elle, le navigateur mobile dézoome et les media queries ne fonctionnent pas.'},
-  {cat:'responsive', q:"Quelle est la différence entre max-width et min-width dans @media ?", a:"<code>max-width</code> = 'jusqu'à cette taille' (style mobile).\n<code>min-width</code> = 'à partir de cette taille' (style tablette/desktop)."},
-  {cat:'responsive', q:"Cite les 3 principaux breakpoints du cours.", a:"480/576px → Mobile\n768px → Tablette\n960px → Desktop"},
-  {cat:'responsive', q:"Pourquoi 1 pixel CSS ≠ 1 pixel physique sur mobile ?", a:"Les écrans Retina ont un devicePixelRatio de 2 : 640px physiques = 320px CSS."},
-  {cat:'responsive', q:"Quelle valeur @media détecte le mode sombre ?", a:"<code>@media (prefers-color-scheme: dark)</code>"},
-  
-  // GRID (détail)
-  {cat:'grid', q:"Quelle propriété active CSS Grid sur un conteneur ?", a:"<code>display: grid;</code>"},
-  {cat:'grid', q:"Que représente l'unité fr dans CSS Grid ?", a:"Une fraction de l'espace disponible. <code>1fr 2fr</code> = 1/3 et 2/3."},
-  {cat:'grid', q:"Comment créer 3 colonnes égales avec repeat() ?", a:"<code>grid-template-columns: repeat(3, 1fr);</code>"},
-  {cat:'grid', q:"Comment rendre une grille responsive sans media query ?", a:"<code>grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));</code>"},
-  {cat:'grid', q:"À quoi sert minmax() ?", a:"Taille min et max. <code>minmax(120px, auto)</code> = au moins 120px, s'adapte au contenu."},
-  {cat:'grid', q:"Comment faire occuper 2 colonnes à un élément ?", a:"<code>grid-column: span 2;</code>"},
-  {cat:'grid', q:"Comment placer un élément de la colonne 1 à 3 ?", a:"<code>grid-column: 1 / 3;</code>"},
-  {cat:'grid', q:"Comment sélectionner le 5e enfant d'une liste en CSS ?", a:"<code>li:nth-child(5) { ... }</code>"},
-  {cat:'grid', q:"Quelle différence entre Flexbox et Grid ?", a:"Flexbox = 1D. Grid = 2D. Flexbox pour nav/galerie, Grid pour layout de page."},
-  {cat:'grid', q:"Comment nommer des zones dans Grid ?", a:'<code>grid-template-areas: "header header" "main aside";</code>\npuis : <code>grid-area: header;</code>'},
-  {cat:'grid', q:"Comment centrer dans une cellule Grid ?", a:"<code>display:flex; justify-content:center; align-items:center;</code>"},
-  {cat:'grid', q:"Comment définir une gouttière ?", a:"<code>gap: 16px;</code>"},
-  
-  // JS (détail)
-  {cat:'js', q:"Quelle est la différence entre let et const ?", a:"<code>const</code> : valeur fixe.\n<code>let</code> : variable, peut être réassignée."},
-  {cat:'js', q:"Comment sélectionner tous les [data-number] ?", a:"<code>document.querySelectorAll('[data-number]')</code>"},
-  {cat:'js', q:"Pourquoi préférer data-* aux classes pour les rôles JS ?", a:"Séparation des responsabilités : classes = style, data-* = données/rôles fonctionnels."},
-  {cat:'js', q:"Comment parcourir un NodeList ?", a:"<code>boutons.forEach(button => { ... });</code>"},
-  {cat:'js', q:"Comment modifier le texte d'un élément ?", a:"<code>element.innerText = 'nouveau texte';</code>"},
-  {cat:'js', q:"Comment ajouter / retirer une classe CSS en JS ?", a:"<code>el.classList.add('hide');\nel.classList.remove('hide');</code>"},
-  {cat:'js', q:"Pourquoi utiliser defer sur la balise script ?", a:"Lance le script après le chargement complet du DOM."},
-  {cat:'js', q:"Structure d'un tableau JSON d'objets ?", a:"<code>[{ cle: valeur }, { cle: valeur }]</code>"},
-  
-  // TP (détail)
-  {cat:'tp', q:"TP calculatrice : data-* à attribuer ?", a:"<code>data-output</code>, <code>data-number</code>, <code>data-operation</code>, <code>data-equals</code>, <code>data-all-clear</code>"},
-  {cat:'tp', q:"TP quiz : comment créer dynamiquement un bouton réponse ?", a:"<code>let btn = document.createElement('button');\nbtn.innerText = reponse.texte;\nbtn.classList.add('btn');\nif (reponse.correcte) btn.dataset.correct = true;\nconteneur.appendChild(btn);</code>"},
-  {cat:'tp', q:"TP quiz : que fait Array.from(el.children) ?", a:"Convertit une HTMLCollection en tableau JS standard, utilisable avec forEach."},
+  {cat:'examen',q:"C'est quoi le responsive web design ?",a:"Adapter le design d'un site à toutes les tailles d'écran (mobile, tablette, desktop) grâce aux media queries CSS."},
+  {cat:'examen',q:"Balise meta OBLIGATOIRE pour que le responsive fonctionne sur mobile ?",a:'<code>&lt;meta name="viewport" content="width=device-width"&gt;</code>\nSans elle, le navigateur mobile dézoome et ignore tes media queries.'},
+  {cat:'examen',q:"Syntaxe d'une media query mobile (max 576px) ?",a:'<code>@media screen and (max-width: 576px) {\n  /* styles mobile */\n}</code>'},
+  {cat:'examen',q:"Syntaxe d'une media query desktop (min 960px) ?",a:'<code>@media screen and (min-width: 960px) {\n  /* styles desktop */\n}</code>'},
+  {cat:'examen',q:"Breakpoints du cours : mobile / tablette / desktop ?",a:"Mobile : &lt; 480–576px\nTablette : ≥ 768px\nDesktop : ≥ 960px"},
+  {cat:'examen',q:"C'est quoi le Mobile First ?",a:"On code d'abord pour mobile (sans media query), puis on enrichit pour les grands écrans avec des <code>min-width</code>."},
+  {cat:'examen',q:"Comment activer CSS Grid sur un conteneur ?",a:'<code>display: grid;</code>'},
+  {cat:'examen',q:"Que veut dire l'unité fr ?",a:"Fraction de l'espace disponible dans la grille.\n<code>1fr 2fr</code> → le 2e prend 2× plus de place que le 1er."},
+  {cat:'examen',q:"Comment créer 4 colonnes égales de 100px avec repeat() ?",a:'<code>grid-template-columns: repeat(4, 100px);</code>'},
+  {cat:'examen',q:"Comment créer une grille responsive sans media query ?",a:'<code>grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));</code>'},
+  {cat:'examen',q:"À quoi sert minmax(120px, auto) ?",a:"Taille minimum 120px, s'étire automatiquement selon le contenu. Utilisé pour l'affichage de la calculatrice."},
+  {cat:'examen',q:"Comment faire qu'un élément occupe 2 colonnes ?",a:'<code>grid-column: span 2;</code>'},
+  {cat:'examen',q:"Comment placer un élément de la colonne 1 à 3 ?",a:'<code>grid-column: 1 / 3;</code>'},
+  {cat:'examen',q:"Comment ajouter une gouttière de 8px dans une grid ?",a:'<code>gap: 8px;</code>\nOu séparément : <code>row-gap</code> / <code>column-gap</code>.'},
+  {cat:'examen',q:"Comment centrer verticalement ET horizontalement dans une cellule ?",a:'<code>display: flex;\njustify-content: center;\nalign-items: center;</code>'},
+  {cat:'examen',q:"Flexbox vs Grid : quelle différence fondamentale ?",a:"Flexbox = 1 dimension (ligne OU colonne).\nGrid = 2 dimensions (lignes ET colonnes simultanément)."},
+  {cat:'examen',q:"Comment nommer des zones de grille avec grid-area ?",a:'Sur le conteneur :\n<code>grid-template-areas: "header header" "main aside";</code>\nSur chaque enfant : <code>grid-area: header;</code>'},
+  {cat:'examen',q:"Comment sélectionner le 3e élément d'une liste en CSS ?",a:'<code>li:nth-child(3) { ... }</code>'},
+  {cat:'examen',q:"const vs let en JavaScript ?",a:"<code>const</code> → valeur fixe, ne peut pas être réassignée.\n<code>let</code> → variable, peut changer."},
+  {cat:'examen',q:"Comment sélectionner UN élément par son attribut data-output ?",a:"<code>document.querySelector('[data-output]')</code>"},
+  {cat:'examen',q:"Comment sélectionner TOUS les [data-number] ?",a:"<code>document.querySelectorAll('[data-number]')</code>\n→ retourne un NodeList, parcourable avec forEach."},
+  {cat:'examen',q:"Comment écouter un clic sur un bouton ?",a:"<code>btn.addEventListener('click', () => {\n  // action\n});</code>"},
+  {cat:'examen',q:"Comment modifier le texte visible d'un élément en JS ?",a:"Écrire : <code>element.innerText = 'nouveau texte';</code>\nLire : <code>const texte = element.innerText;</code>"},
+  {cat:'examen',q:"Comment ajouter / supprimer une classe CSS en JS ?",a:"<code>el.classList.add('hide');\nel.classList.remove('hide');\nel.classList.toggle('active');</code>"},
+  {cat:'examen',q:"Pourquoi utiliser defer sur la balise script ?",a:'<code>&lt;script src="main.js" defer&gt;&lt;/script&gt;</code>\nLe script se lance APRÈS le chargement du HTML.'},
+  {cat:'examen',q:"C'est quoi data-* et pourquoi l'utiliser à la place des classes ?",a:"<code>data-*</code> sert à porter des rôles/données fonctionnelles (JS).\nLes classes CSS servent au style. On ne mélange pas les deux."},
+  {cat:'examen',q:"Comment lire / écrire un dataset en JS ?",a:'HTML : <code>data-correct="true"</code>\nLire : <code>button.dataset.correct</code>\nÉcrire : <code>button.dataset.correct = true</code>'},
+  {cat:'examen',q:"Comment créer un élément HTML dynamiquement en JS ?",a:"<code>const btn = document.createElement('button');\nbtn.innerText = 'Cliquer';\nbtn.classList.add('btn');\nconteneur.appendChild(btn);</code>"},
+  {cat:'examen',q:"Comment vider le contenu HTML d'un élément ?",a:"<code>element.innerHTML = '';</code>"},
+  {cat:'examen',q:"Structure d'un tableau JSON de questions pour le TP quiz ?",a:"<code>[{\n  enonce: 'Question ?',\n  reponses: [\n    { texte: 'Bonne', correcte: true },\n    { texte: 'Fausse', correcte: false }\n  ]\n}]</code>"},
+  {cat:'examen',q:"Comment parcourir un NodeList avec forEach ?",a:"<code>const btns = document.querySelectorAll('[data-number]');\nbtns.forEach(btn => {\n  btn.addEventListener('click', () => { ... });\n});</code>"},
+  {cat:'examen',q:"Que fait Array.from(el.children) ?",a:"Convertit une HTMLCollection (non itérable directement) en tableau JS standard, utilisable avec <code>forEach</code>."},
+  {cat:'examen',q:"TP Calculatrice : grille de combien de colonnes et lignes ?",a:"4 colonnes × 6 lignes.\nColonnes et lignes : 100px.\nAffichage (ligne 1) : <code>minmax(120px, auto)</code>."},
+  {cat:'examen',q:"TP Calculatrice : quels sont les 5 data-* à attribuer ?",a:"<code>data-output</code> → écran\n<code>data-number</code> → 0–9 et point\n<code>data-operation</code> → +, −, ×, ÷\n<code>data-equals</code> → =\n<code>data-all-clear</code> → AC"},
+  {cat:'examen',q:"TP Quiz : comment afficher la bonne couleur sur les boutons au clic ?",a:"<code>function setStatusClass(el, isCorrect) {\n  el.classList.remove('correct', 'wrong');\n  el.classList.add(isCorrect ? 'correct' : 'wrong');\n}</code>"},
+  {cat:'examen',q:"Comment activer Flexbox avec retour à la ligne automatique ?",a:"<code>display: flex;\nflex-wrap: wrap;\njustify-content: center;\nalign-items: center;</code>"},
+  {cat:'examen',q:"Flexbox : que fait flex-direction: column ?",a:"Les éléments s'empilent verticalement au lieu d'être côte à côte."},
+  {cat:'examen',q:"Analyse Decathlon : comment 3 articles par ligne devient 1 en mobile ?",a:"Conteneur en <code>display: flex; flex-wrap: wrap;</code>, chaque article à <code>width: 33%</code>.\nMedia query mobile → <code>width: 100%</code> → les articles s'empilent."},
+  {cat:'examen',q:"Comment récupérer la valeur d'un champ input en JS ?",a:"<code>const val = document.getElementById('mon-input').value;</code>\nToujours une string → convertir avec <code>Number(val)</code> si calcul numérique."},
+  {cat:'examen',q:"textContent vs innerText ?",a:"<code>textContent</code> → tout le texte brut du nœud.\n<code>innerText</code> → texte visible uniquement (respecte le CSS)."},
+  {cat:'examen',q:"Comment demander une saisie et afficher une alerte ?",a:"<code>const prenom = prompt('Ton prénom ?');\nalert('Bonjour ' + prenom);</code>"},
+  {cat:'responsive',q:"Qu'est-ce que le Mobile First ?",a:"On développe d'abord pour mobile, puis on enrichit pour les grands écrans via des <code>min-width</code>."},
+  {cat:'responsive',q:"Différence entre max-width et min-width dans @media ?",a:"<code>max-width</code> = jusqu'à cette taille (mobile).\n<code>min-width</code> = à partir de cette taille (desktop)."},
+  {cat:'responsive',q:"3 breakpoints du cours.",a:"480/576px → Mobile\n768px → Tablette\n960px → Desktop"},
+  {cat:'grid',q:"Propriété pour activer CSS Grid ?",a:"<code>display: grid;</code>"},
+  {cat:'grid',q:"3 colonnes égales avec repeat() ?",a:"<code>grid-template-columns: repeat(3, 1fr);</code>"},
+  {cat:'grid',q:"Grille responsive sans media query ?",a:"<code>grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));</code>"},
+  {cat:'grid',q:"Élément sur 2 colonnes ?",a:"<code>grid-column: span 2;</code>"},
+  {cat:'grid',q:"Sélectionner le 5e enfant en CSS ?",a:"<code>li:nth-child(5) { ... }</code>"},
+  {cat:'grid',q:"Zones nommées dans Grid ?",a:'<code>grid-template-areas: "header header" "main aside";</code>\npuis : <code>grid-area: header;</code>'},
+  {cat:'js',q:"Différence let / const ?",a:"<code>const</code> : valeur fixe.\n<code>let</code> : peut être réassignée."},
+  {cat:'js',q:"Sélectionner tous les [data-number] ?",a:"<code>document.querySelectorAll('[data-number]')</code>"},
+  {cat:'js',q:"Parcourir un NodeList ?",a:"<code>liste.forEach(el => { ... });</code>"},
+  {cat:'js',q:"Modifier le texte d'un élément ?",a:"<code>element.innerText = 'texte';</code>"},
+  {cat:'js',q:"Ajouter / retirer une classe en JS ?",a:"<code>el.classList.add('hide');\nel.classList.remove('hide');</code>"},
+  {cat:'tp',q:"TP calculatrice : 5 data-* ?",a:"<code>data-output</code>, <code>data-number</code>, <code>data-operation</code>, <code>data-equals</code>, <code>data-all-clear</code>"},
+  {cat:'tp',q:"TP quiz : créer dynamiquement un bouton réponse ?",a:"<code>let btn = document.createElement('button');\nbtn.innerText = reponse.texte;\nbtn.classList.add('btn');\nif (reponse.correcte) btn.dataset.correct = true;\nconteneur.appendChild(btn);</code>"},
+  {cat:'tp',q:"Array.from(el.children) ?",a:"Convertit une HTMLCollection en tableau JS standard pour pouvoir utiliser forEach."},
 ];
 
-// ─── FLASHCARDS ───────────────────────────────────────
+// ── QCM_DATA ─────────────────────────────────────────
+const QCM_DATA = [
+{q:"C'est quoi le responsive web design ?",opts:["Adapter les couleurs du site selon le navigateur","Adapter le design à toutes les tailles d'écran via les media queries","Créer plusieurs fichiers HTML séparés pour mobile et desktop","Utiliser uniquement des pixels fixes pour la mise en page"],correct:1,ok:"Exactement — le responsive adapte le design à toutes les résolutions via les media queries CSS, avec un seul fichier HTML.",ko:"Bonne réponse : B. Le responsive adapte le design à toutes les tailles d'écran via les media queries CSS. On n'a qu'un seul HTML — c'est le CSS qui change."},
+{q:"Quelle balise meta est obligatoire pour que les media queries fonctionnent sur mobile ?",opts:['&lt;meta charset="UTF-8"&gt;','&lt;meta name="description" content="..."&gt;','&lt;meta name="viewport" content="width=device-width"&gt;','&lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;'],correct:2,ok:"Oui — sans viewport, le mobile dézoome la page et ignore tes media queries. Absolument indispensable.",ko:"Bonne réponse : C. Sans viewport, le navigateur mobile dézoome la page entière et ignore tes media queries."},
+{q:"Syntaxe correcte pour cibler les écrans mobiles (max 576px) ?",opts:["@media (min-width: 576px) { ... }","@screen mobile and (width: 576px) { ... }","@media screen and (max-width: 576px) { ... }","@media screen or (max-width: 576px) { ... }"],correct:2,ok:"Correct — max-width: 576px cible les écrans jusqu'à 576px. La syntaxe : @media screen and (...) { }.",ko:"Bonne réponse : C. min-width cible les grands écrans. @screen n'existe pas. Le mot-clé est 'and', pas 'or'."},
+{q:"C'est quoi l'approche Mobile First ?",opts:["Créer d'abord la version desktop, puis dégrader avec max-width","Écrire le CSS de base pour mobile, puis enrichir avec des min-width","Utiliser Bootstrap pour gérer automatiquement le responsive","Charger des images plus légères sur mobile via srcset"],correct:1,ok:"Exactement — base CSS pour mobile sans media query, puis min-width pour enrichir tablette et desktop.",ko:"Bonne réponse : B. Mobile First = coder la base pour mobile, puis enrichir avec des min-width. L'inverse (desktop + max-width) c'est Desktop First."},
+{q:"Breakpoints principaux du cours ?",opts:["320px / 768px / 1200px","480–576px / 768px / 960px","600px / 900px / 1400px","576px / 992px / 1200px"],correct:1,ok:"Bonne réponse — 480–576px (mobile), 768px (tablette), 960px (desktop). Ce sont exactement les valeurs du cours.",ko:"Bonne réponse : B. Le cours utilise : < 480–576px (mobile), ≥ 768px (tablette), ≥ 960px (desktop)."},
+{q:"Quelle propriété CSS active une grille sur un conteneur ?",opts:["display: flex","position: grid","layout: grid","display: grid"],correct:3,ok:"Exact — display: grid transforme le conteneur en grille. Ses enfants directs deviennent automatiquement des éléments de la grille.",ko:"Bonne réponse : D. display: flex active Flexbox (1D). position: grid et layout: grid n'existent pas en CSS."},
+{q:"Que représente l'unité fr dans CSS Grid ?",opts:["Un pourcentage fixe de la largeur de l'écran","La largeur d'un caractère dans la police courante","Une fraction de l'espace disponible dans le conteneur","La taille minimale d'une colonne en pixels"],correct:2,ok:"Oui — fr = fraction de l'espace disponible. 1fr 2fr → le 2e prend 2× plus de place. C'est relatif, pas fixe.",ko:"Bonne réponse : C. fr = fraction de l'espace disponible. Pas des %, pas des pixels. 1fr 2fr = 1/3 et 2/3."},
+{q:"Comment créer 4 colonnes égales de 100px chacune ?",opts:["grid-columns: 4 * 100px","grid-template-columns: 100px 100px 100px 100px","grid-template-columns: repeat(4, 100px)","columns: repeat(4, 100px)"],correct:2,ok:"Parfait — repeat(4, 100px) est la syntaxe compacte. B fonctionne aussi mais repeat() est préférable.",ko:"Bonne réponse : C. repeat(n, taille) répète n fois la valeur. grid-columns et columns n'existent pas en CSS."},
+{q:"Comment créer une grille responsive sans media query ?",opts:["grid-template-columns: auto auto auto","grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))","grid-template-columns: repeat(3, 33%)","grid-template-columns: fit-content(200px)"],correct:1,ok:"Exactement — auto-fill remplit les colonnes automatiquement, minmax(200px, 1fr) garantit une largeur min de 200px.",ko:"Bonne réponse : B. auto-fill + minmax() : les colonnes s'adaptent automatiquement. Les autres options ne font pas de responsive automatique."},
+{q:"À quoi sert minmax(120px, auto) dans le TP calculatrice ?",opts:["Limiter la largeur de la calculatrice entre 120px et auto","Définir que la ligne fait au minimum 120px et s'étire selon le contenu","Centrer l'affichage avec 120px de marge","Créer un gap de 120px entre les colonnes"],correct:1,ok:"Exact — minmax(120px, auto) sur grid-template-rows : min 120px, s'étire si le contenu est plus grand.",ko:"Bonne réponse : B. minmax(min, max) définit les tailles min et max. Ici : min 120px, max auto (s'adapte au contenu)."},
+{q:"Comment faire occuper 2 colonnes à un élément dans une grille ?",opts:["grid-column-count: 2","width: 2fr","colspan: 2","grid-column: span 2"],correct:3,ok:"Correct — grid-column: span 2 étend l'élément sur 2 colonnes. colspan est un attribut HTML (tableaux), pas CSS.",ko:"Bonne réponse : D. grid-column: span 2. grid-column-count n'existe pas, colspan est pour les tableaux HTML."},
+{q:"Comment placer précisément un élément de la colonne 1 à 3 ?",opts:["grid-column: 1 to 3","grid-column: 1 - 3","grid-column: 1 / 3","grid-column-start: 1; grid-column-end: 4"],correct:2,ok:"Exact — grid-column: 1 / 3 place l'élément entre les lignes de grille 1 et 3 (avec un slash). D serait correct avec end: 4 pour aller jusqu'à la même position.",ko:"Bonne réponse : C. La syntaxe start / end utilise un slash. 'to' et '-' n'existent pas en CSS Grid."},
+{q:"Comment centrer un élément dans une cellule Grid ?",opts:["grid-align: center center sur la cellule","margin: auto sur l'élément enfant","display: flex; justify-content: center; align-items: center sur la cellule","text-align: center; vertical-align: middle sur la cellule"],correct:2,ok:"Exactement — on applique Flexbox sur la cellule : display:flex + justify-content:center (horiz) + align-items:center (vert).",ko:"Bonne réponse : C. On met Flexbox sur la cellule. vertical-align ne fonctionne pas sur les éléments grid, grid-align n'existe pas."},
+{q:"Différence fondamentale entre Flexbox et Grid ?",opts:["Flexbox est pour les anciens navigateurs, Grid pour les modernes","Flexbox positionne en 1D (ligne OU colonne), Grid en 2D simultanément","Flexbox nécessite JavaScript, Grid est purement CSS","Grid est uniquement pour les grilles de photos"],correct:1,ok:"Exact — Flexbox = 1D (une direction à la fois). Grid = 2D (lignes ET colonnes simultanément). Les deux sont CSS pur.",ko:"Bonne réponse : B. Flexbox = 1 dimension. Grid = 2 dimensions simultanées. Tous deux sont CSS purs et bien supportés."},
+{q:"Comment sélectionner le 3e élément d'une liste en CSS ?",opts:["li.index-3 { }","li:nth-child(3) { }","li:child(3) { }","li[position=3] { }"],correct:1,ok:"Parfait — :nth-child(3) est la pseudo-classe standard. Utilisé dans le Monopoly pour placer chaque case précisément.",ko:"Bonne réponse : B. :nth-child(n) est la pseudo-classe CSS. :child(), .index-3 et [position=3] n'existent pas."},
+{q:"Différence entre const et let en JavaScript ?",opts:["const est pour les nombres, let pour les chaînes","const ne peut pas être réassigné, let peut changer","let est disponible partout, const seulement dans les fonctions","Il n'y a aucune différence"],correct:1,ok:"Correct — const = valeur fixe, let = peut changer. On préfère const par défaut, let seulement si la valeur doit changer.",ko:"Bonne réponse : B. const/let n'ont pas de type associé. const = immuable, let = variable. Leur portée est le bloc { } qui les contient."},
+{q:"Comment sélectionner UN seul élément via [data-output] en JS ?",opts:["document.getElement('[data-output]')","document.findAll('[data-output]')","document.querySelectorAll('[data-output]')","document.querySelector('[data-output]')"],correct:3,ok:"Exact — querySelector('[data-output]') retourne le premier élément trouvé. querySelectorAll retourne TOUS.",ko:"Bonne réponse : D. querySelector → un seul. querySelectorAll → tous. getElement et findAll n'existent pas."},
+{q:"Comment sélectionner TOUS les boutons [data-number] ?",opts:["document.querySelector('[data-number]')","document.getElementsByAttr('data-number')","document.querySelectorAll('[data-number]')","document.getAll('[data-number]')"],correct:2,ok:"Parfait — querySelectorAll retourne un NodeList de tous les éléments correspondants, parcourable avec forEach.",ko:"Bonne réponse : C. querySelectorAll (avec All). querySelector = premier seulement. getElementsByAttr et getAll n'existent pas."},
+{q:"Comment écouter un clic sur un bouton en JavaScript ?",opts:["btn.onClick = function() { }","btn.addEventListener('click', () => { })","btn.listen('click', () => { })","btn.on('click', () => { })"],correct:1,ok:"Correct — addEventListener('click', callback) est la méthode standard et recommandée.",ko:"Bonne réponse : B. btn.listen et btn.on n'existent pas en JS vanilla. btn.onClick= fonctionne mais écrase les autres gestionnaires."},
+{q:"Comment modifier le texte visible d'un élément en JS ?",opts:["element.value = 'texte'","element.textNode = 'texte'","element.innerHTML = 'texte'","element.innerText = 'texte'"],correct:3,ok:"Exact — innerText lit et écrit le texte visible. innerHTML fonctionne aussi mais interprète le HTML (risque si données utilisateur).",ko:"Bonne réponse : D. .value est pour les inputs. .textNode n'existe pas. innerHTML interprète le HTML, plus risqué."},
+{q:"Comment ajouter la classe 'active' à un élément sans perdre les autres classes ?",opts:["element.class += ' active'","element.className = 'active'","element.classList.add('active')","element.addClassName('active')"],correct:2,ok:"Parfait — classList.add() ajoute la classe sans toucher aux autres. className= remplacerait toutes les classes existantes.",ko:"Bonne réponse : C. element.class n'existe pas. className= écrase toutes les classes. addClassName() n'existe pas."},
+{q:"Pourquoi mettre defer sur la balise script ?",opts:["Pour charger le script depuis un CDN","Pour que le script s'exécute après le chargement complet du HTML","Pour compresser le JS automatiquement","Pour désactiver le cache sur ce fichier"],correct:1,ok:"Exact — defer fait attendre l'exécution jusqu'au chargement complet du DOM. Sans ça, le script s'exécute avant que les éléments existent.",ko:"Bonne réponse : B. Sans defer dans le <head>, le script s'exécute avant que les éléments HTML soient créés → erreurs."},
+{q:"Pourquoi utiliser data-* plutôt que des classes pour les rôles JS ?",opts:["data-* charge plus vite que les classes","Classes CSS = style, data-* = données/rôles fonctionnels — séparation des responsabilités","querySelectorAll ne peut pas sélectionner les classes","data-* est obligatoire pour addEventListener"],correct:1,ok:"Exact — séparation des responsabilités : classes = style CSS, data-* = comportement JS. Modifier le style ne casse pas le JS.",ko:"Bonne réponse : B. C'est une question de bonne pratique. querySelectorAll peut très bien cibler les classes."},
+{q:"Comment créer un bouton dynamiquement et l'ajouter dans un conteneur ?",opts:["conteneur.addElement('<button>Cliquer</button>')","conteneur.innerHTML += '<button>Cliquer</button>'","const btn = document.createElement('button'); btn.innerText = 'Cliquer'; conteneur.appendChild(btn)","document.insertButton('Cliquer', conteneur)"],correct:2,ok:"Parfait — createElement crée l'élément, on le configure, puis appendChild l'insère dans le DOM. Pattern du TP Quiz.",ko:"Bonne réponse : C. innerHTML+= recrée tout le contenu existant. addElement et insertButton n'existent pas."},
+{q:"Que fait Array.from(element.children) ?",opts:["Copie tous les enfants dans un nouveau nœud","Retourne le nombre d'enfants","Convertit une HTMLCollection en tableau JS standard utilisable avec forEach","Sélectionne les enfants par leur index"],correct:2,ok:"Exact — HTMLCollection n'a pas de méthode forEach. Array.from() la convertit en vrai tableau JS. Utilisé dans le TP Quiz.",ko:"Bonne réponse : C. HTMLCollection n'a pas forEach. Array.from() la convertit en tableau standard."},
+{q:"TP Calculatrice : structure de la grille ?",opts:["3 colonnes × 5 lignes, colonnes de 80px","4 colonnes × 6 lignes, colonnes et lignes de 100px","5 colonnes × 4 lignes, colonnes de 100px","4 colonnes × 4 lignes, affichage en span 4"],correct:1,ok:"Exact — 4×6, 100px. Ligne 1 (affichage) : minmax(120px, auto). AC et = font span 2.",ko:"Bonne réponse : B. 4 colonnes × 6 lignes de 100px. L'affichage en haut : minmax(120px, auto). AC et = en span 2."},
+{q:"Quel data-* reçoit l'écran d'affichage de la calculatrice ?",opts:["data-display","data-screen","data-result","data-output"],correct:3,ok:"Correct — data-output est l'attribut de l'écran. En JS : document.querySelector('[data-output]').",ko:"Bonne réponse : D. Les 5 data-* : data-output (écran), data-number (chiffres), data-operation, data-equals, data-all-clear."},
+{q:"Dans le TP Quiz, que fait setStatusClass() ?",opts:["Elle change background-color directement en style JS","Elle retire 'correct' et 'wrong', puis ajoute la bonne selon isCorrect","Elle ajoute uniquement 'correct' sur la bonne réponse","Elle utilise element.style.color pour changer la couleur"],correct:1,ok:"Exactement — remove d'abord pour repartir propre, puis add selon isCorrect. L'ordre remove → add évite les conflits.",ko:"Bonne réponse : B. On retire les deux classes d'abord, puis on en ajoute une selon isCorrect. Jamais de style direct dans ce pattern."},
+{q:"Comment activer Flexbox avec retour à la ligne automatique ?",opts:["display: flex; flex-direction: row-wrap","display: flex; overflow: wrap","display: flex; flex-wrap: wrap","display: flexbox; wrap: true"],correct:2,ok:"Correct — flex-wrap: wrap permet aux éléments de passer à la ligne quand il n'y a plus de place.",ko:"Bonne réponse : C. row-wrap n'existe pas, overflow: wrap non plus, display: flexbox est invalide."},
+{q:"Que fait flex-direction: column ?",opts:["Les éléments s'alignent en colonnes côte à côte comme une grille","Les éléments s'empilent verticalement l'un sous l'autre","Le conteneur prend toute la hauteur de l'écran","Les éléments passent à la ligne automatiquement"],correct:1,ok:"Exact — flex-direction: column empile les éléments verticalement. La valeur par défaut est row (côte à côte).",ko:"Bonne réponse : B. flex-direction: column = empilement vertical. flex-wrap gère les retours à la ligne."},
+{q:"Pour récupérer la valeur d'un champ input en JS ?",opts:["input.innerText","input.textContent","input.content","input.value"],correct:3,ok:"Exact — .value est la propriété pour lire la valeur d'un input. Retourne toujours une string → Number() pour les calculs.",ko:"Bonne réponse : D. Les inputs n'ont pas de contenu texte → innerText et textContent ne fonctionnent pas. .value est la bonne propriété."},
+{q:"textContent vs innerText — quelle différence ?",opts:["textContent pour les divs, innerText pour les spans","textContent = texte brut du nœud, innerText = texte visible (respecte le CSS)","innerText est plus rapide que textContent","textContent modifie le HTML, innerText seulement le texte"],correct:1,ok:"Correct — textContent inclut même les éléments cachés. innerText = seulement le visible. Pour afficher un résultat, les deux marchent.",ko:"Bonne réponse : B. textContent = tout le texte brut. innerText = visible uniquement. Pour l'affichage courant les deux donnent le même résultat."},
+{q:"Comment nommer des zones dans une grille (grid-area) ?",opts:["Ajouter id='header' sur chaque élément HTML","grid-zone: header sur le conteneur, header: area sur l'enfant","grid-template-areas sur le conteneur + grid-area sur chaque enfant","grid-template-columns: header section footer"],correct:2,ok:"Exactement — deux étapes : 1) grid-template-areas sur le conteneur, 2) grid-area: nom sur chaque enfant.",ko:"Bonne réponse : C. grid-template-areas = la carte. grid-area: nom = chaque enfant dans sa zone. L'id HTML n'a rien à voir."},
+{q:"Approche correcte pour passer de 1 à 3 colonnes dans le TP sportif ?",opts:["Desktop first : 3 colonnes par défaut + max-width 576px pour passer à 1","Mobile first : 1 colonne par défaut, min-width 480px → 2 col, min-width 960px → 3 col","Créer 3 fichiers CSS séparés (mobile.css, tablet.css, desktop.css)","Utiliser JavaScript pour détecter la largeur"],correct:1,ok:"Exact — Mobile First : base CSS sans grid (1 colonne), puis @media min-width pour enrichir progressivement.",ko:"Bonne réponse : B. Mobile First = base pour mobile sans media query, puis on enrichit avec min-width. Plusieurs CSS ou JS ne sont pas les bonnes pratiques."},
+];
+
+// ── QCM_CODE — Niveau 2 : lecture de code ────────────
+const QCM_CODE = [
+{
+  q:"Quelle est l'erreur dans ce CSS ?",
+  code:`.conteneur {\n  display: grid;\n  grid-template-colums: repeat(3, 1fr);\n  gap: 16px;\n}`,
+  opts:[
+    "display: grid n'existe pas, il faut display: css-grid",
+    "repeat(3, 1fr) est une syntaxe invalide",
+    "grid-template-colums est mal orthographié — il manque un 'n' (columns)",
+    "gap: 16px doit s'écrire grid-gap: 16px 16px"
+  ],
+  correct:2,
+  ok:"Exact — faute de frappe classique : <code>grid-template-colums</code> au lieu de <code>grid-template-columns</code>. Le CSS est ignoré silencieusement, la grille ne se crée pas.",
+  ko:"Bonne réponse : C. <code>grid-template-colums</code> — il manque le 'n'. CSS ignore silencieusement les propriétés inconnues. C'est le bug le plus fréquent sur Grid."
+},
+{
+  q:"Ce code JS fonctionne-t-il ? Sinon, quelle est l'erreur ?",
+  code:`const boutons = document.querySelectorAll('[data-number]');\nboutons.forEach(button => {\n  appendNumber(button.innerText);\n});`,
+  opts:[
+    "querySelectorAll ne peut pas sélectionner par attribut data-*, il faut une classe",
+    "forEach ne fonctionne pas sur un NodeList, il faut Array.from() d'abord",
+    "innerText doit s'écrire innerHTML pour récupérer le texte d'un bouton",
+    "Ce code est correct — querySelectorAll retourne un NodeList itérable avec forEach"
+  ],
+  correct:3,
+  ok:"Exact — depuis ES6, les NodeList retournés par querySelectorAll supportent forEach directement. Array.from() n'est nécessaire que pour les HTMLCollection (comme element.children).",
+  ko:"Bonne réponse : D. Ce code est correct. querySelectorAll retourne un NodeList qui supporte forEach nativement. Array.from() est utile pour element.children (HTMLCollection), pas ici."
+},
+{
+  q:"Quelle est l'erreur dans cette media query ?",
+  code:`@media screen or (max-width: 576px) {\n  .articles {\n    flex-direction: column;\n  }\n}`,
+  opts:[
+    "flex-direction: column n'est pas valide dans une media query",
+    "Le mot-clé est 'and', pas 'or' — @media screen and (max-width: 576px)",
+    "max-width doit s'écrire max_width avec un underscore",
+    "Il manque le préfixe -webkit- devant max-width pour Safari"
+  ],
+  correct:1,
+  ok:"Exact — la syntaxe correcte est <code>@media screen and (max-width: 576px)</code>. 'or' n'est pas un opérateur valide ici.",
+  ko:"Bonne réponse : B. La syntaxe @media utilise 'and' pour combiner les conditions. 'or' rend la règle invalide et elle est ignorée par le navigateur."
+},
+{
+  q:"Ce code addEventListener a une erreur. Laquelle ?",
+  code:`const btn = document.querySelector('#mon-btn');\nbtn.addEventListener(click, () => {\n  console.log('cliqué');\n});`,
+  opts:[
+    "querySelector ne peut pas sélectionner par ID, il faut getElementById",
+    "L'événement 'click' doit être entre guillemets : addEventListener('click', ...)",
+    "Il faut écrire function() { } au lieu d'une arrow function",
+    "console.log ne fonctionne pas dans un addEventListener"
+  ],
+  correct:1,
+  ok:"Exact — <code>click</code> sans guillemets est une variable non définie. L'événement doit être une string : <code>'click'</code>.",
+  ko:"Bonne réponse : B. <code>click</code> sans guillemets = variable non définie → erreur. Tous les noms d'événements sont des strings : <code>'click'</code>, <code>'input'</code>, <code>'submit'</code>..."
+},
+{
+  q:"Quelle est l'erreur dans ce code de la calculatrice ?",
+  code:`const output = document.querySelector('[data-output]');\nconst clearButton = document.querySelector('[data-all-clear]');\n\nclearButton.addEventListener('click', () => {\n  output.innerHTML = '';\n});`,
+  opts:[
+    "data-all-clear n'est pas un attribut valide, il faut data-clear",
+    "addEventListener ne prend pas d'arrow function, il faut function() { }",
+    "Pour vider l'affichage d'une div texte, on devrait utiliser innerText = '' plutôt que innerHTML = ''",
+    "Ce code est entièrement correct"
+  ],
+  correct:2,
+  ok:"Oui — les deux fonctionnent mais <code>innerText = ''</code> est plus approprié pour vider du texte pur. innerHTML = '' fonctionne aussi mais est prévu pour du contenu HTML.",
+  ko:"Bonne réponse : C. Le code fonctionne, mais <code>innerText = ''</code> est plus sémantiquement correct pour vider du texte. innerHTML est prévu pour le HTML. Les deux sont acceptés à l'exam."
+},
+{
+  q:"Quelle ligne de ce code JS contient une erreur ?",
+  code:`// Ligne 1\nconst buttons = document.querySelectorAll('[data-number]');\n// Ligne 2\nbuttons.forEach(btn => {\n// Ligne 3\n  btn.addEventListener('click', () => {\n// Ligne 4\n    appendNumber(btn.innertext);\n  });\n});`,
+  opts:[
+    "Ligne 1 — querySelectorAll ne retourne pas un tableau itérable",
+    "Ligne 2 — forEach n'existe pas sur un résultat de querySelectorAll",
+    "Ligne 4 — innertext est mal écrit, il faut innerText (T majuscule)",
+    "Ligne 3 — addEventListener doit être appelé avec function() et non une arrow function"
+  ],
+  correct:2,
+  ok:"Exact — JavaScript est sensible à la casse. <code>innertext</code> → undefined. La bonne propriété est <code>innerText</code> avec un T majuscule.",
+  ko:"Bonne réponse : C. <code>innertext</code> avec t minuscule n'existe pas. JavaScript est case-sensitive : la bonne propriété est <code>innerText</code> (T majuscule)."
+},
+{
+  q:"Quelle est l'erreur dans ce CSS Grid ?",
+  code:`#calc-grid {\n  display: grid;\n  grid-template-columns: repeat(4, 100px);\n  grid-template-rows: repeat(5, 100px);\n  gap: 4px;\n}\n.display { grid-column: span 4; }`,
+  opts:[
+    "Le display devrait avoir grid-column: 1 / 4 et non span 4",
+    "La grille devrait avoir 6 lignes (minmax pour l'affichage + 5 lignes de boutons), pas 5 lignes uniformes de 100px",
+    "repeat(4, 100px) est invalide, il faut écrire 100px 100px 100px 100px",
+    "gap: 4px doit s'écrire grid-gap: 4px pour la calculatrice"
+  ],
+  correct:1,
+  ok:"Exact — la première ligne (l'écran) doit utiliser <code>minmax(120px, auto)</code> pour s'adapter au contenu. Avec repeat(5, 100px) on a 5 lignes identiques, alors qu'il faut 6 lignes dont la première spéciale.",
+  ko:"Bonne réponse : B. La grille calculatrice = 6 lignes : <code>minmax(120px, auto)</code> pour l'écran + <code>repeat(5, 100px)</code> pour les boutons. Ici il n'y a que 5 lignes identiques de 100px."
+},
+{
+  q:"Quelle est l'erreur dans ce code du TP Quiz ?",
+  code:`function showQuestion(question) {\n  questionElement.innerText = question.enonce;\n  question.reponses.forEach(reponse => {\n    let button = document.createElement('button');\n    button.innerText = reponse.texte;\n    button.classList.add('btn');\n    if (reponse.correcte) {\n      button.dataset.correct == true;\n    }\n    answerButtonsElement.appendChild(button);\n  });\n}`,
+  opts:[
+    "document.createElement('button') devrait être document.createElement('input')",
+    "button.classList.add('btn') écrase toutes les classes existantes du bouton",
+    "button.dataset.correct == true utilise == (comparaison) au lieu de = (affectation)",
+    "answerButtonsElement.appendChild devrait être answerButtonsElement.addChild"
+  ],
+  correct:2,
+  ok:"Exact — <code>==</code> est une comparaison, ça ne fait rien. Il faut <code>=</code> pour affecter la valeur : <code>button.dataset.correct = true</code>. Même piège que le while() du cours.",
+  ko:"Bonne réponse : C. <code>==</code> compare sans affecter. La valeur n'est jamais écrite sur le dataset → la bonne réponse n'est jamais marquée. Il faut <code>=</code> (affectation simple)."
+},
+{
+  q:"Ce code CSS est censé centrer un élément dans une cellule Grid. Quelle est l'erreur ?",
+  code:`.cellule {\n  display: flex;\n  justify-items: center;\n  align-items: center;\n}`,
+  opts:[
+    "display: flex et align-items ne sont pas compatibles",
+    "justify-items n'existe pas en Flexbox — la propriété correcte est justify-content",
+    "Il faut ajouter flex-direction: row pour que le centrage fonctionne",
+    "align-items: center ne centre pas verticalement dans un conteneur flex"
+  ],
+  correct:1,
+  ok:"Exact — en Flexbox, la propriété pour aligner sur l'axe principal est <code>justify-content</code>, pas <code>justify-items</code>. Cette dernière existe en Grid, pas en Flex.",
+  ko:"Bonne réponse : B. <code>justify-items</code> est une propriété Grid, pas Flexbox. En Flexbox, l'axe principal = <code>justify-content</code>, l'axe secondaire = <code>align-items</code>."
+},
+{
+  q:"Quelle est l'erreur dans ce JS ?",
+  code:`const startButton = document.getElementById('start-btn');\nconst questionContainer = document.getElementById('question-container');\n\nstartButton.addEventListener('click', startGame);\n\nfunction startGame() {\n  startButton.classList.add('hide');\n  questionContainer.classList.remove('hide');\n  showQuestion(questions[currentQuestionIndex]);\n}`,
+  opts:[
+    "getElementById ne peut pas sélectionner des éléments avec un tiret dans l'id",
+    "startButton.classList.add devrait être startButton.classList.remove pour cacher le bouton",
+    "showQuestion est appelée avant d'être définie — il faut la déclarer avant startGame",
+    "Ce code est correct — addEventListener, classList et l'appel de fonction sont tous valides"
+  ],
+  correct:3,
+  ok:"Exact — ce code est correct. En JS, les déclarations de fonctions (function maFonction) sont hoistées : elles peuvent être appelées avant leur définition dans le fichier.",
+  ko:"Bonne réponse : D. Ce code est entièrement valide. Les fonctions déclarées avec 'function' sont hoistées (disponibles avant leur définition). getElementById accepte les tirets dans les IDs."
+},
+{
+  q:"Quelle est l'erreur dans cette media query Mobile First ?",
+  code:`/* Base mobile */\n.articles {\n  display: flex;\n  flex-direction: column;\n}\n\n/* Desktop */\n@media screen and (max-width: 960px) {\n  .articles {\n    display: grid;\n    grid-template-columns: repeat(3, 1fr);\n  }\n}`,
+  opts:[
+    "display: flex et display: grid ne peuvent pas s'appliquer au même élément",
+    "flex-direction: column est invalide sur un conteneur qui devient grid",
+    "C'est max-width qui est utilisé pour le desktop au lieu de min-width — c'est l'inverse du Mobile First",
+    "repeat(3, 1fr) nécessite que le conteneur ait une largeur fixe définie"
+  ],
+  correct:2,
+  ok:"Exact — Mobile First utilise <code>min-width</code> pour les grands écrans. <code>max-width: 960px</code> cible les écrans jusqu'à 960px (mobiles + tablettes), pas le desktop. Il faut <code>min-width: 960px</code>.",
+  ko:"Bonne réponse : C. Mobile First = base pour mobile + <code>min-width</code> pour enrichir. <code>max-width: 960px</code> s'applique aux petits écrans, pas aux grands. C'est un piège classique."
+},
+{
+  q:"Quelle est l'erreur dans ce sélecteur JS ?",
+  code:`const numberButtons = document.querySelector('[data-number]');\n\nnumberButtons.forEach(button => {\n  button.addEventListener('click', () => {\n    appendNumber(button.innerText);\n  });\n});`,
+  opts:[
+    "Le sélecteur [data-number] doit s'écrire avec un # devant : [#data-number]",
+    "querySelector retourne un seul élément, pas un NodeList — forEach va planter. Il faut querySelectorAll",
+    "forEach ne fonctionne pas sur des éléments avec des attributs data-*",
+    "appendNumber doit être déclaré avant d'être utilisé dans forEach"
+  ],
+  correct:1,
+  ok:"Exact — <code>querySelector</code> retourne un seul Element (ou null), pas un NodeList. forEach n'existe pas sur un Element → erreur. Il faut <code>querySelectorAll</code> pour récupérer tous les boutons.",
+  ko:"Bonne réponse : B. querySelector = un seul élément. querySelectorAll = tous. Appeler forEach sur un seul Element provoque une erreur 'forEach is not a function'."
+},
+{
+  q:"Ce code CSS est censé faire une grille responsive. Quelle est l'erreur ?",
+  code:`.grille {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(200px));\n  gap: 16px;\n}`,
+  opts:[
+    "auto-fill n'est pas compatible avec minmax()",
+    "minmax() attend deux arguments (min, max) — il manque la valeur max : minmax(200px, 1fr)",
+    "gap: 16px doit être séparé en row-gap et column-gap pour fonctionner avec auto-fill",
+    "display: grid et repeat() ne sont pas compatibles sur le même conteneur"
+  ],
+  correct:1,
+  ok:"Exact — <code>minmax()</code> requiert deux arguments. <code>minmax(200px)</code> est invalide. La syntaxe correcte : <code>minmax(200px, 1fr)</code> — minimum 200px, maximum 1 fraction.",
+  ko:"Bonne réponse : B. minmax() = deux arguments obligatoires. <code>minmax(200px)</code> est invalide. Il faut <code>minmax(200px, 1fr)</code> pour que les colonnes s'étendent jusqu'à l'espace disponible."
+},
+{
+  q:"Quelle est l'erreur dans ce code HTML/JS du TP calculatrice ?",
+  code:`&lt;button data-number&gt;1&lt;/button&gt;\n&lt;button data-number&gt;2&lt;/button&gt;\n&lt;div data-output&gt;&lt;/div&gt;\n\n&lt;script&gt;\nconst output = document.querySelector('data-output');\n&lt;/script&gt;`,
+  opts:[
+    "Les boutons data-number doivent avoir une valeur : data-number='1'",
+    "querySelector('data-output') oublie les crochets — il faut querySelector('[data-output]')",
+    "Une div ne peut pas avoir un attribut data-output, seulement les input",
+    "Il faut utiliser getElementById('data-output') à la place de querySelector"
+  ],
+  correct:1,
+  ok:"Exact — pour sélectionner par attribut, il faut les crochets : <code>querySelector('[data-output]')</code>. Sans crochets, le sélecteur 'data-output' est invalide et retourne null.",
+  ko:"Bonne réponse : B. querySelector prend un sélecteur CSS. Les attributs en CSS s'écrivent entre crochets : <code>[data-output]</code>. Sans crochets → sélecteur invalide → null."
+},
+{
+  q:"Quelle est l'erreur dans ce code du TP Quiz ?",
+  code:`function setStatusClass(element, isCorrect) {\n  element.classList.add('correct', 'wrong');\n  if (isCorrect) {\n    element.classList.add('correct');\n  } else {\n    element.classList.add('wrong');\n  }\n}`,
+  opts:[
+    "classList.add ne peut pas prendre deux arguments en même temps",
+    "La première ligne ajoute les deux classes 'correct' ET 'wrong' simultanément au lieu de les retirer — il faut classList.remove",
+    "isCorrect devrait être comparé avec === true explicitement",
+    "Ce code est correct, il n'y a pas d'erreur logique"
+  ],
+  correct:1,
+  ok:"Exact — la première ligne ajoute les deux classes au lieu de les supprimer. Il faut <code>classList.remove('correct', 'wrong')</code> pour repartir propre, puis ajouter la bonne.",
+  ko:"Bonne réponse : B. <code>classList.add('correct', 'wrong')</code> met les deux classes en même temps (les deux couleurs à la fois). Il faut <code>classList.remove</code> d'abord pour nettoyer."
+},
+];
+
+// ── FLASHCARDS LOGIC ─────────────────────────────────
 let currentDeck = ALL_CARDS.filter(c => c.cat === 'examen');
-let currentIdx = 0;
-let isFlipped = false;
-let errors = [];    // cartes ratées
-let okCount = 0;
-let koCount = 0;
+let currentIdx = 0, isFlipped = false, errors = [], okCount = 0, koCount = 0;
 
 function filterCat(cat, btn) {
   document.querySelectorAll('.fc-cat').forEach(b => b.classList.remove('active'));
@@ -1281,83 +787,174 @@ function filterCat(cat, btn) {
   currentDeck = cat === 'all' ? [...ALL_CARDS] : ALL_CARDS.filter(c => c.cat === cat);
   startDeck();
 }
-
 function startDeck() {
-  currentIdx = 0; isFlipped = false;
-  errors = []; okCount = 0; koCount = 0;
+  currentIdx = 0; isFlipped = false; errors = []; okCount = 0; koCount = 0;
   document.getElementById('fc-end').classList.remove('visible');
   document.getElementById('flashcard').style.display = '';
   document.getElementById('fc-judge').classList.remove('visible');
-  updateStats();
-  renderCard();
+  updateStats(); renderCard();
 }
-
 function renderCard() {
   const card = currentDeck[currentIdx];
   document.getElementById('fc-question').textContent = card.q;
   document.getElementById('fc-answer').innerHTML = card.a.replace(/\n/g,'<br>');
   document.getElementById('fc-counter').textContent = (currentIdx+1) + ' / ' + currentDeck.length;
-  const pct = ((currentIdx+1)/currentDeck.length*100).toFixed(0);
-  document.getElementById('fc-progress-fill').style.width = pct + '%';
-  // reset flip
+  document.getElementById('fc-progress-fill').style.width = ((currentIdx+1)/currentDeck.length*100) + '%';
   isFlipped = false;
   document.getElementById('flashcard').classList.remove('flipped');
   document.getElementById('fc-judge').classList.remove('visible');
 }
-
 function flipCard() {
-  if (isFlipped) return; // déjà retournée, pas de re-flip
+  if (isFlipped) return;
   isFlipped = true;
   document.getElementById('flashcard').classList.add('flipped');
   document.getElementById('fc-judge').classList.add('visible');
 }
-
 function judge(knew) {
   if (!isFlipped) return;
-  if (knew) {
-    okCount++;
-  } else {
-    koCount++;
-    errors.push(currentDeck[currentIdx]);
-  }
+  if (knew) okCount++; else { koCount++; errors.push(currentDeck[currentIdx]); }
   updateStats();
   const next = currentIdx + 1;
-  if (next >= currentDeck.length) {
-    showEnd();
-  } else {
-    currentIdx = next;
-    renderCard();
-  }
+  if (next >= currentDeck.length) showEnd();
+  else { currentIdx = next; renderCard(); }
 }
-
 function updateStats() {
   document.getElementById('stat-ok').textContent = '✓ ' + okCount;
   document.getElementById('stat-ko').textContent = '✗ ' + koCount;
 }
-
 function showEnd() {
   document.getElementById('flashcard').style.display = 'none';
   document.getElementById('fc-judge').classList.remove('visible');
   document.getElementById('fc-progress-fill').style.width = '100%';
   document.getElementById('end-ok').textContent = okCount + ' sus ✓';
   document.getElementById('end-ko').textContent = koCount + ' à revoir ✗';
-  const retryBtn = document.getElementById('btn-retry');
-  retryBtn.disabled = errors.length === 0;
+  document.getElementById('btn-retry').disabled = errors.length === 0;
   document.getElementById('fc-end').classList.add('visible');
 }
+function retryErrors() { if (errors.length === 0) return; currentDeck = [...errors]; startDeck(); }
+function restartDeck() { startDeck(); }
 
-function retryErrors() {
-  if (errors.length === 0) return;
-  currentDeck = [...errors];
-  startDeck();
+// ── QCM LOGIC ─────────────────────────────────────────
+const LETTERS = ['A','B','C','D'];
+let qcmDeck = [], qcmAnswered = 0, qcmCorrect = 0, qcmErrorIdxs = [];
+let currentLevel = 1;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i>0; i--) { const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
 }
 
-function restartDeck() {
-  startDeck();
+function switchLevel(lvl) {
+  currentLevel = lvl;
+  document.getElementById('lvl-btn-1').classList.toggle('active', lvl===1);
+  document.getElementById('lvl-btn-2').classList.toggle('active', lvl===2);
+  buildQCM(shuffle(lvl===1 ? QCM_DATA : QCM_CODE));
+  window.scrollTo(0,0);
 }
 
-// Init sur examen
+function buildQCM(data) {
+  const container = document.getElementById('qcm-cards');
+  container.innerHTML = '';
+  document.getElementById('qcm-end').classList.remove('visible');
+  qcmDeck = data; qcmAnswered = 0; qcmCorrect = 0; qcmErrorIdxs = [];
+  updateQCMBar();
+
+  data.forEach((q, qi) => {
+    const indexed = q.opts.map((o,i) => ({text:o, isCorrect: i===q.correct}));
+    const shuffled = shuffle(indexed);
+    const correctShuffledIdx = shuffled.findIndex(o => o.isCorrect);
+
+    const card = document.createElement('div');
+    card.className = 'qcm-card';
+    card.id = 'qc-' + qi;
+
+    // bloc code optionnel (niveau 2)
+    const codeHtml = q.code
+      ? `<div class="qcm-code">${q.code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`
+      : '';
+
+    const optsHtml = shuffled.map((opt, oi) => {
+      const mono = /classList|querySelector|addEventListener|dataset|innerHTML|innerText|display:|grid-|@media|&lt;|document\.|element\.|btn\./.test(opt.text);
+      return `<div class="qcm-opt" id="qo-${qi}-${oi}" onclick="qcmAnswer(${qi},${oi},${correctShuffledIdx})">
+        <span class="qcm-opt-letter">${LETTERS[oi]}</span>
+        <span class="qcm-opt-text${mono?' mono':''}">${opt.text}</span>
+      </div>`;
+    }).join('');
+
+    card.innerHTML = `
+      <div class="qcm-card-head">
+        <div class="qcm-qnum">Question ${qi+1} / ${data.length}</div>
+        <div class="qcm-qtext">${q.q}${codeHtml}</div>
+      </div>
+      <div class="qcm-opts">${optsHtml}</div>
+      <div class="qcm-exp" id="qe-${qi}"></div>
+      <button class="qcm-next" id="qn-${qi}" onclick="qcmScrollNext(${qi})">Question suivante →</button>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function qcmAnswer(qi, chosen, correctIdx) {
+  const card = document.getElementById('qc-' + qi);
+  if (card.dataset.done) return;
+  card.dataset.done = '1';
+  const isOk = chosen === correctIdx;
+  const q = qcmDeck[qi];
+  for (let oi = 0; oi < q.opts.length; oi++) {
+    const opt = document.getElementById(`qo-${qi}-${oi}`);
+    opt.classList.add('disabled');
+    if (oi===chosen && isOk)   opt.classList.add('opt-correct');
+    else if (oi===chosen)      opt.classList.add('opt-wrong');
+    else if (oi===correctIdx)  opt.classList.add('opt-missed');
+  }
+  card.classList.add(isOk ? 'card-ok' : 'card-ko');
+  const exp = document.getElementById('qe-' + qi);
+  exp.classList.add('visible', isOk ? 'qcm-exp-ok' : 'qcm-exp-ko');
+  exp.innerHTML = `<span class="qcm-exp-badge ${isOk?'ok':'ko'}">${isOk?'✓ Bonne réponse !':'✗ Pas tout à fait…'}</span>${isOk ? q.ok : q.ko}`;
+  if (!isOk) qcmErrorIdxs.push(qi);
+  qcmAnswered++; if (isOk) qcmCorrect++;
+  updateQCMBar();
+  if (qi < qcmDeck.length-1) document.getElementById('qn-'+qi).classList.add('visible');
+  else setTimeout(showQCMEnd, 350);
+}
+
+function qcmScrollNext(qi) {
+  document.getElementById('qn-'+qi).classList.remove('visible');
+  const next = document.getElementById('qc-'+(qi+1));
+  if (next) next.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function updateQCMBar() {
+  document.getElementById('qcm-score').textContent = qcmCorrect;
+  document.getElementById('qcm-total').textContent = qcmAnswered;
+  document.getElementById('qcm-progress-bar').style.width =
+    (qcmDeck.length > 0 ? qcmAnswered/qcmDeck.length*100 : 0) + '%';
+}
+
+function showQCMEnd() {
+  const ko = qcmAnswered - qcmCorrect;
+  const pct = Math.round(qcmCorrect/qcmDeck.length*100);
+  document.getElementById('qcm-end-ok').textContent = qcmCorrect + ' correctes ✓';
+  document.getElementById('qcm-end-ko').textContent = ko + ' ratées ✗';
+  document.getElementById('qcm-end-sub').textContent = pct + '% — ' + (pct>=70?'bon niveau 💪':'encore un peu !');
+  document.getElementById('qcm-btn-retry').disabled = qcmErrorIdxs.length===0;
+  const el = document.getElementById('qcm-end');
+  el.classList.add('visible');
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function qcmRestart() { buildQCM(shuffle(currentLevel===1?QCM_DATA:QCM_CODE)); window.scrollTo(0,0); }
+function qcmShuffle() { buildQCM(shuffle(currentLevel===1?QCM_DATA:QCM_CODE)); window.scrollTo(0,0); }
+function qcmRetryErrors() {
+  if (!qcmErrorIdxs.length) return;
+  buildQCM(qcmErrorIdxs.map(i=>qcmDeck[i]));
+  window.scrollTo(0,0);
+}
+
+// init
 startDeck();
+buildQCM(shuffle(QCM_DATA));
 </script>
 </body>
 </html>
