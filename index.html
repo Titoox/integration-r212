@@ -131,117 +131,171 @@ nav{
   color:var(--accent2);
 }
 
-/* FLASHCARD SECTION */
+/* FLASHCARD SECTION — mobile first */
 .fc-container{
-  max-width:680px;margin:0 auto;
+  max-width:520px;margin:0 auto;padding:0 0.1rem;
 }
-.fc-meta{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;
+.fc-cats{
+  display:flex;gap:0.4rem;flex-wrap:wrap;
+  margin-bottom:0.75rem;
 }
-.fc-counter{
-  font-family:'DM Mono',monospace;
-  font-size:0.8rem;color:var(--muted2);
-}
-.fc-cats{display:flex;gap:0.5rem;flex-wrap:wrap;}
 .fc-cat{
-  padding:0.3rem 0.75rem;
-  border:1px solid var(--border2);
-  border-radius:20px;
-  background:none;
-  color:var(--muted2);
+  padding:0.35rem 0.75rem;
+  border:1px solid var(--border2);border-radius:20px;
+  background:none;color:var(--muted2);
   font-family:'Syne',sans-serif;
-  font-size:0.72rem;font-weight:600;
-  letter-spacing:0.05em;
+  font-size:0.7rem;font-weight:600;letter-spacing:0.04em;
   cursor:pointer;transition:all 0.2s;
+  -webkit-tap-highlight-color:transparent;
 }
-.fc-cat:hover,.fc-cat.active{
-  background:var(--accent);
-  border-color:var(--accent);
-  color:#000;
+.fc-cat:hover,.fc-cat.active{background:var(--accent);border-color:var(--accent);color:#000;}
+
+.fc-progress{height:3px;background:var(--s3);border-radius:2px;overflow:hidden;margin-bottom:0.6rem;}
+.fc-progress-fill{height:100%;background:var(--accent);transition:width 0.3s;}
+
+.fc-stats{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:0.75rem;
 }
+.fc-counter{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--muted2);}
+.fc-stat-ok{font-size:0.82rem;font-weight:700;color:var(--green);}
+.fc-stat-ko{font-size:0.82rem;font-weight:700;color:var(--red);}
 
 .flashcard{
   perspective:1200px;
-  height:260px;cursor:pointer;
-  margin-bottom:1.5rem;
+  min-height:200px;cursor:pointer;
+  margin-bottom:0.75rem;
+  -webkit-tap-highlight-color:transparent;
 }
 .fc-inner{
-  width:100%;height:100%;
+  width:100%;min-height:200px;
   position:relative;
   transform-style:preserve-3d;
-  transition:transform 0.55s cubic-bezier(0.4,0,0.2,1);
+  transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
 }
 .flashcard.flipped .fc-inner{transform:rotateY(180deg);}
 .fc-front,.fc-back{
   position:absolute;inset:0;
   backface-visibility:hidden;
-  border-radius:16px;
-  padding:2rem;
-  display:flex;flex-direction:column;
-  justify-content:center;
+  border-radius:14px;padding:1.25rem;
+  display:flex;flex-direction:column;justify-content:center;
+  min-height:200px;
 }
-.fc-front{
-  background:var(--s2);
-  border:1px solid var(--border2);
-}
-.fc-back{
-  background:var(--s3);
-  border:1px solid var(--accent);
-  transform:rotateY(180deg);
-}
+.fc-front{background:var(--s2);border:1px solid var(--border2);}
+.fc-back{background:var(--s3);border:1px solid var(--accent);transform:rotateY(180deg);}
 .fc-side-label{
-  font-size:0.6rem;font-weight:700;
+  font-size:0.58rem;font-weight:700;
   letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:0.75rem;
+  color:var(--muted);margin-bottom:0.6rem;
 }
 .fc-back .fc-side-label{color:var(--accent);}
-.fc-question{
-  font-family:'Instrument Serif',serif;
-  font-size:1.3rem;line-height:1.4;
-}
-.fc-answer{
-  font-size:0.88rem;line-height:1.65;
-  color:var(--text);
-}
+.fc-question{font-family:'Instrument Serif',serif;font-size:1.15rem;line-height:1.4;}
+.fc-answer{font-size:0.81rem;line-height:1.7;color:var(--text);overflow-y:auto;max-height:190px;}
 .fc-answer code{
-  font-family:'DM Mono',monospace;
-  font-size:0.8rem;
+  font-family:'DM Mono',monospace;font-size:0.74rem;
   background:rgba(255,255,255,0.06);
-  padding:0.15rem 0.35rem;border-radius:4px;
-  color:var(--accent2);
+  padding:0.15rem 0.35rem;border-radius:4px;color:var(--accent2);
 }
-.fc-hint{
-  margin-top:1rem;
-  font-size:0.72rem;color:var(--muted);
-  text-align:center;letter-spacing:0.04em;
+.fc-hint{margin-top:0.75rem;font-size:0.65rem;color:var(--muted);text-align:center;}
+
+/* Boutons je sais / je sais pas */
+.fc-judge{display:none;gap:0.6rem;margin-bottom:1rem;}
+.fc-judge.visible{display:flex;}
+.fc-judge-btn{
+  flex:1;padding:0.9rem 0.5rem;
+  border:none;border-radius:12px;
+  font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;
+  cursor:pointer;transition:transform 0.1s;
+  -webkit-tap-highlight-color:transparent;
+}
+.fc-judge-btn:active{transform:scale(0.96);}
+.fc-judge-no{background:var(--red);color:#fff;}
+.fc-judge-yes{background:var(--green);color:#fff;}
+
+/* Écran de fin */
+.fc-end{display:none;flex-direction:column;align-items:center;padding:2rem 0.5rem;text-align:center;}
+.fc-end.visible{display:flex;}
+.fc-end-title{font-family:'Instrument Serif',serif;font-size:2rem;margin-bottom:1.25rem;}
+.fc-end-scores{display:flex;gap:0.75rem;margin-bottom:1.5rem;flex-wrap:wrap;justify-content:center;}
+.fc-end-score{padding:0.9rem 1.5rem;border-radius:12px;font-size:1.3rem;font-weight:700;}
+.fc-end-score.ok{background:rgba(77,153,102,0.15);color:var(--green);}
+.fc-end-score.ko{background:rgba(184,85,80,0.15);color:var(--red);}
+.fc-end-actions{display:flex;flex-direction:column;gap:0.6rem;width:100%;}
+.fc-end-btn{
+  padding:1rem;border:none;border-radius:12px;
+  font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.fc-end-btn:active{opacity:0.8;}
+.fc-end-btn.retry{background:var(--red);color:#fff;}
+.fc-end-btn.restart{background:var(--s3);color:var(--text);border:1px solid var(--border2);}
+#btn-retry:disabled{opacity:0.35;cursor:default;}
+
+@media(min-width:520px){
+  .fc-question{font-size:1.35rem;}
+  .fc-front,.fc-back,.fc-inner,.flashcard{min-height:240px;}
+  .fc-judge-btn{font-size:1.05rem;padding:1rem;}
 }
 
-.fc-controls{
-  display:flex;gap:0.75rem;justify-content:center;
-  margin-bottom:2rem;
+/* FC STATS */
+.fc-stats{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1rem;padding:0 0.25rem;
 }
-.fc-btn{
-  padding:0.65rem 1.5rem;
-  border-radius:8px;border:1px solid var(--border2);
-  background:var(--s2);color:var(--text);
+.fc-stat-ok{font-size:0.85rem;font-weight:700;color:var(--green);}
+.fc-stat-ko{font-size:0.85rem;font-weight:700;color:var(--red);}
+
+/* BOUTONS JE SAIS / JE SAIS PAS */
+.fc-judge{
+  display:none;
+  gap:0.75rem;
+  margin-bottom:1.5rem;
+}
+.fc-judge.visible{display:flex;}
+.fc-judge-btn{
+  flex:1;
+  padding:1rem;
+  border:none;border-radius:12px;
   font-family:'Syne',sans-serif;
-  font-size:0.8rem;font-weight:600;
-  cursor:pointer;transition:all 0.2s;
+  font-size:1rem;font-weight:700;
+  cursor:pointer;transition:opacity 0.15s, transform 0.1s;
+  -webkit-tap-highlight-color:transparent;
 }
-.fc-btn:hover{background:var(--s3);}
-.fc-btn.prev:hover{border-color:var(--blue);}
-.fc-btn.next{background:var(--accent);border-color:var(--accent);color:#000;}
-.fc-btn.next:hover{background:var(--accent2);}
+.fc-judge-btn:active{transform:scale(0.97);}
+.fc-judge-no{background:var(--red);color:#fff;}
+.fc-judge-yes{background:var(--green);color:#fff;}
 
-.fc-progress{
-  height:3px;background:var(--s3);
-  border-radius:2px;overflow:hidden;
+/* ÉCRAN DE FIN */
+.fc-end{
+  display:none;
+  flex-direction:column;align-items:center;
+  padding:2rem 1rem;text-align:center;
 }
-.fc-progress-fill{
-  height:100%;background:var(--accent);
-  transition:width 0.3s;
+.fc-end.visible{display:flex;}
+.fc-end-title{
+  font-family:'Instrument Serif',serif;
+  font-size:2rem;margin-bottom:1.5rem;
 }
+.fc-end-scores{
+  display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;justify-content:center;
+}
+.fc-end-score{
+  padding:1rem 2rem;border-radius:12px;
+  font-size:1.5rem;font-weight:700;
+}
+.fc-end-score.ok{background:rgba(77,153,102,0.15);color:var(--green);}
+.fc-end-score.ko{background:rgba(184,85,80,0.15);color:var(--red);}
+.fc-end-actions{display:flex;flex-direction:column;gap:0.75rem;width:100%;max-width:320px;}
+.fc-end-btn{
+  padding:1rem;border:none;border-radius:12px;
+  font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;
+  cursor:pointer;transition:opacity 0.2s;
+}
+.fc-end-btn:active{opacity:0.8;}
+.fc-end-btn.retry{background:var(--red);color:#fff;}
+.fc-end-btn.restart{background:var(--s3);color:var(--text);border:1px solid var(--border2);}
+#btn-retry:disabled{opacity:0.35;cursor:default;}
 
 /* FICHES */
 .fiche{
@@ -1050,27 +1104,37 @@ document.getElementById('resultat').textContent = 'Résultat : ' + aire + ' m²'
 <!-- ======= FLASHCARDS ======= -->
 <section class="section" id="flashcards">
   <div class="section-title">Flashcards</div>
-  <div class="section-sub">Clique pour retourner. Navigue avec les boutons.</div>
+  <div class="section-sub">Retourne la carte, puis dis si tu savais ou non.</div>
 
   <div class="fc-container">
-    <div class="fc-meta">
-      <span class="fc-counter" id="fc-counter">1 / 30</span>
-      <div class="fc-cats">
-        <button class="fc-cat" onclick="filterCat('all',this)">Tout</button>
-        <button class="fc-cat active" onclick="filterCat('examen',this)">⚡ Examen</button>
-        <button class="fc-cat" onclick="filterCat('responsive',this)">Responsive</button>
-        <button class="fc-cat" onclick="filterCat('grid',this)">Grid</button>
-        <button class="fc-cat" onclick="filterCat('js',this)">JavaScript</button>
-        <button class="fc-cat" onclick="filterCat('tp',this)">TPs</button>
-      </div>
+
+    <!-- Filtres catégories -->
+    <div class="fc-cats" id="fc-cats">
+      <button class="fc-cat" onclick="filterCat('all',this)">Tout</button>
+      <button class="fc-cat active" onclick="filterCat('examen',this)">⚡ Examen</button>
+      <button class="fc-cat" onclick="filterCat('responsive',this)">Responsive</button>
+      <button class="fc-cat" onclick="filterCat('grid',this)">Grid</button>
+      <button class="fc-cat" onclick="filterCat('js',this)">JS</button>
+      <button class="fc-cat" onclick="filterCat('tp',this)">TPs</button>
     </div>
 
+    <!-- Barre de progression -->
+    <div class="fc-progress"><div class="fc-progress-fill" id="fc-progress-fill"></div></div>
+
+    <!-- Stats -->
+    <div class="fc-stats">
+      <span class="fc-stat-ok" id="stat-ok">✓ 0</span>
+      <span class="fc-counter" id="fc-counter">1 / 41</span>
+      <span class="fc-stat-ko" id="stat-ko">✗ 0</span>
+    </div>
+
+    <!-- Carte -->
     <div class="flashcard" id="flashcard" onclick="flipCard()">
-      <div class="fc-inner">
+      <div class="fc-inner" id="fc-inner">
         <div class="fc-front">
           <div class="fc-side-label">Question</div>
           <div class="fc-question" id="fc-question">Chargement...</div>
-          <div class="fc-hint">Clique pour voir la réponse</div>
+          <div class="fc-hint">Tape pour retourner</div>
         </div>
         <div class="fc-back">
           <div class="fc-side-label">Réponse</div>
@@ -1079,14 +1143,25 @@ document.getElementById('resultat').textContent = 'Résultat : ' + aire + ' m²'
       </div>
     </div>
 
-    <div class="fc-controls">
-      <button class="fc-btn prev" onclick="prevCard()">← Préc.</button>
-      <button class="fc-btn next" onclick="nextCard()">Suiv. →</button>
+    <!-- Boutons je sais / je sais pas — visibles seulement après retournement -->
+    <div class="fc-judge" id="fc-judge">
+      <button class="fc-judge-btn fc-judge-no" onclick="judge(false)">✗ Je savais pas</button>
+      <button class="fc-judge-btn fc-judge-yes" onclick="judge(true)">✓ Je savais</button>
     </div>
 
-    <div class="fc-progress">
-      <div class="fc-progress-fill" id="fc-progress-fill"></div>
+    <!-- Écran de fin -->
+    <div class="fc-end" id="fc-end">
+      <div class="fc-end-title">Terminé !</div>
+      <div class="fc-end-scores">
+        <div class="fc-end-score ok" id="end-ok">0 sus</div>
+        <div class="fc-end-score ko" id="end-ko">0 à revoir</div>
+      </div>
+      <div class="fc-end-actions">
+        <button class="fc-end-btn retry" id="btn-retry" onclick="retryErrors()">Rejouer les erreurs</button>
+        <button class="fc-end-btn restart" onclick="restartDeck()">Tout rejouer</button>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -1192,14 +1267,28 @@ const ALL_CARDS = [
   {cat:'tp', q:"TP quiz : que fait Array.from(el.children) ?", a:"Convertit une HTMLCollection en tableau JS standard, utilisable avec forEach."},
 ];
 
+// ─── FLASHCARDS ───────────────────────────────────────
 let currentDeck = ALL_CARDS.filter(c => c.cat === 'examen');
 let currentIdx = 0;
+let isFlipped = false;
+let errors = [];    // cartes ratées
+let okCount = 0;
+let koCount = 0;
 
 function filterCat(cat, btn) {
   document.querySelectorAll('.fc-cat').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   currentDeck = cat === 'all' ? [...ALL_CARDS] : ALL_CARDS.filter(c => c.cat === cat);
-  currentIdx = 0;
+  startDeck();
+}
+
+function startDeck() {
+  currentIdx = 0; isFlipped = false;
+  errors = []; okCount = 0; koCount = 0;
+  document.getElementById('fc-end').classList.remove('visible');
+  document.getElementById('flashcard').style.display = '';
+  document.getElementById('fc-judge').classList.remove('visible');
+  updateStats();
   renderCard();
 }
 
@@ -1210,25 +1299,65 @@ function renderCard() {
   document.getElementById('fc-counter').textContent = (currentIdx+1) + ' / ' + currentDeck.length;
   const pct = ((currentIdx+1)/currentDeck.length*100).toFixed(0);
   document.getElementById('fc-progress-fill').style.width = pct + '%';
+  // reset flip
+  isFlipped = false;
   document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('fc-judge').classList.remove('visible');
 }
 
 function flipCard() {
-  document.getElementById('flashcard').classList.toggle('flipped');
+  if (isFlipped) return; // déjà retournée, pas de re-flip
+  isFlipped = true;
+  document.getElementById('flashcard').classList.add('flipped');
+  document.getElementById('fc-judge').classList.add('visible');
 }
 
-function nextCard() {
-  currentIdx = (currentIdx + 1) % currentDeck.length;
-  renderCard();
+function judge(knew) {
+  if (!isFlipped) return;
+  if (knew) {
+    okCount++;
+  } else {
+    koCount++;
+    errors.push(currentDeck[currentIdx]);
+  }
+  updateStats();
+  const next = currentIdx + 1;
+  if (next >= currentDeck.length) {
+    showEnd();
+  } else {
+    currentIdx = next;
+    renderCard();
+  }
 }
 
-function prevCard() {
-  currentIdx = (currentIdx - 1 + currentDeck.length) % currentDeck.length;
-  renderCard();
+function updateStats() {
+  document.getElementById('stat-ok').textContent = '✓ ' + okCount;
+  document.getElementById('stat-ko').textContent = '✗ ' + koCount;
 }
 
-// Init sur la catégorie examen
-renderCard();
+function showEnd() {
+  document.getElementById('flashcard').style.display = 'none';
+  document.getElementById('fc-judge').classList.remove('visible');
+  document.getElementById('fc-progress-fill').style.width = '100%';
+  document.getElementById('end-ok').textContent = okCount + ' sus ✓';
+  document.getElementById('end-ko').textContent = koCount + ' à revoir ✗';
+  const retryBtn = document.getElementById('btn-retry');
+  retryBtn.disabled = errors.length === 0;
+  document.getElementById('fc-end').classList.add('visible');
+}
+
+function retryErrors() {
+  if (errors.length === 0) return;
+  currentDeck = [...errors];
+  startDeck();
+}
+
+function restartDeck() {
+  startDeck();
+}
+
+// Init sur examen
+startDeck();
 </script>
 </body>
 </html>
