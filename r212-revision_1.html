@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>R212 — Révision Examen</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0b0c0e;
+  --s1:#111315;
+  --s2:#181a1d;
+  --s3:#1e2124;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --text:#eceae5;
+  --muted:#6b6a67;
+  --muted2:#9a9896;
+  --accent:#e8b86d;
+  --accent2:#f0cc90;
+  --green:#4d9966;
+  --red:#b85550;
+  --blue:#5585b5;
+  --purple:#8b6bbf;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Syne',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(11,12,14,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 2rem;
+  display:flex;gap:0;align-items:stretch;
+  overflow-x:auto;
+}
+.nav-btn{
+  padding:1rem 1.25rem;
+  background:none;border:none;
+  color:var(--muted2);
+  font-family:'Syne',sans-serif;
+  font-size:0.75rem;font-weight:600;
+  letter-spacing:0.06em;text-transform:uppercase;
+  cursor:pointer;white-space:nowrap;
+  border-bottom:2px solid transparent;
+  transition:all 0.2s;
+}
+.nav-btn:hover{color:var(--text);}
+.nav-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+/* HEADER */
+.hero{
+  padding:3rem 2.5rem 2rem;
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'R212';
+  position:absolute;right:-1rem;top:-1rem;
+  font-size:12rem;font-weight:800;
+  color:rgba(255,255,255,0.02);
+  font-family:'Syne',sans-serif;
+  pointer-events:none;line-height:1;
+}
+.hero-tag{
+  font-size:0.7rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:0.75rem;
+}
+.hero h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:400;line-height:1.1;
+  margin-bottom:0.75rem;
+}
+.hero p{color:var(--muted2);font-size:0.9rem;max-width:480px;}
+
+/* SECTIONS */
+.section{display:none;padding:2rem 2.5rem 4rem;max-width:1100px;}
+.section.active{display:block;}
+
+.section-title{
+  font-family:'Instrument Serif',serif;
+  font-size:2rem;font-weight:400;
+  margin-bottom:0.5rem;
+}
+.section-sub{color:var(--muted2);font-size:0.85rem;margin-bottom:2rem;}
+
+/* CARDS GRID */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;
+  margin-bottom:2rem;
+}
+.card{
+  background:var(--s1);
+  padding:1.5rem;
+  transition:background 0.2s;
+}
+.card:hover{background:var(--s2);}
+.card-label{
+  font-size:0.65rem;font-weight:700;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:0.5rem;
+}
+.card h3{
+  font-size:0.95rem;font-weight:600;
+  margin-bottom:0.5rem;line-height:1.4;
+}
+.card p{font-size:0.82rem;color:var(--muted2);line-height:1.6;}
+.card code{
+  font-family:'DM Mono',monospace;
+  font-size:0.78rem;
+  background:var(--s3);
+  padding:0.2rem 0.4rem;
+  border-radius:4px;
+  color:var(--accent2);
+}
+
+/* FLASHCARD SECTION */
+.fc-container{
+  max-width:680px;margin:0 auto;
+}
+.fc-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;
+}
+.fc-counter{
+  font-family:'DM Mono',monospace;
+  font-size:0.8rem;color:var(--muted2);
+}
+.fc-cats{display:flex;gap:0.5rem;flex-wrap:wrap;}
+.fc-cat{
+  padding:0.3rem 0.75rem;
+  border:1px solid var(--border2);
+  border-radius:20px;
+  background:none;
+  color:var(--muted2);
+  font-family:'Syne',sans-serif;
+  font-size:0.72rem;font-weight:600;
+  letter-spacing:0.05em;
+  cursor:pointer;transition:all 0.2s;
+}
+.fc-cat:hover,.fc-cat.active{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#000;
+}
+
+.flashcard{
+  perspective:1200px;
+  height:260px;cursor:pointer;
+  margin-bottom:1.5rem;
+}
+.fc-inner{
+  width:100%;height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform 0.55s cubic-bezier(0.4,0,0.2,1);
+}
+.flashcard.flipped .fc-inner{transform:rotateY(180deg);}
+.fc-front,.fc-back{
+  position:absolute;inset:0;
+  backface-visibility:hidden;
+  border-radius:16px;
+  padding:2rem;
+  display:flex;flex-direction:column;
+  justify-content:center;
+}
+.fc-front{
+  background:var(--s2);
+  border:1px solid var(--border2);
+}
+.fc-back{
+  background:var(--s3);
+  border:1px solid var(--accent);
+  transform:rotateY(180deg);
+}
+.fc-side-label{
+  font-size:0.6rem;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:0.75rem;
+}
+.fc-back .fc-side-label{color:var(--accent);}
+.fc-question{
+  font-family:'Instrument Serif',serif;
+  font-size:1.3rem;line-height:1.4;
+}
+.fc-answer{
+  font-size:0.88rem;line-height:1.65;
+  color:var(--text);
+}
+.fc-answer code{
+  font-family:'DM Mono',monospace;
+  font-size:0.8rem;
+  background:rgba(255,255,255,0.06);
+  padding:0.15rem 0.35rem;border-radius:4px;
+  color:var(--accent2);
+}
+.fc-hint{
+  margin-top:1rem;
+  font-size:0.72rem;color:var(--muted);
+  text-align:center;letter-spacing:0.04em;
+}
+
+.fc-controls{
+  display:flex;gap:0.75rem;justify-content:center;
+  margin-bottom:2rem;
+}
+.fc-btn{
+  padding:0.65rem 1.5rem;
+  border-radius:8px;border:1px solid var(--border2);
+  background:var(--s2);color:var(--text);
+  font-family:'Syne',sans-serif;
+  font-size:0.8rem;font-weight:600;
+  cursor:pointer;transition:all 0.2s;
+}
+.fc-btn:hover{background:var(--s3);}
+.fc-btn.prev:hover{border-color:var(--blue);}
+.fc-btn.next{background:var(--accent);border-color:var(--accent);color:#000;}
+.fc-btn.next:hover{background:var(--accent2);}
+
+.fc-progress{
+  height:3px;background:var(--s3);
+  border-radius:2px;overflow:hidden;
+}
+.fc-progress-fill{
+  height:100%;background:var(--accent);
+  transition:width 0.3s;
+}
+
+/* FICHES */
+.fiche{
+  background:var(--s1);
+  border:1px solid var(--border);
+  border-radius:12px;
+  margin-bottom:1rem;
+  overflow:hidden;
+}
+.fiche-header{
+  padding:1rem 1.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  cursor:pointer;
+  border-bottom:1px solid transparent;
+  transition:background 0.2s;
+}
+.fiche-header:hover{background:var(--s2);}
+.fiche.open .fiche-header{border-bottom-color:var(--border);}
+.fiche-title{font-weight:600;font-size:0.9rem;}
+.fiche-toggle{
+  color:var(--muted);font-size:1.2rem;
+  transition:transform 0.2s;
+}
+.fiche.open .fiche-toggle{transform:rotate(45deg);}
+.fiche-body{
+  display:none;
+  padding:1.5rem;
+}
+.fiche.open .fiche-body{display:block;}
+
+/* SYNTAX BLOCKS */
+.code-block{
+  background:var(--s3);
+  border:1px solid var(--border2);
+  border-radius:8px;
+  padding:1rem 1.25rem;
+  margin:0.75rem 0;
+  font-family:'DM Mono',monospace;
+  font-size:0.78rem;line-height:1.7;
+  color:var(--accent2);
+  overflow-x:auto;
+  white-space:pre;
+}
+
+/* TABLES */
+.tbl{
+  width:100%;border-collapse:collapse;
+  font-size:0.82rem;margin:1rem 0;
+}
+.tbl th{
+  text-align:left;padding:0.6rem 1rem;
+  background:var(--s3);color:var(--accent);
+  font-size:0.7rem;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;
+  border-bottom:1px solid var(--border2);
+}
+.tbl td{
+  padding:0.6rem 1rem;
+  border-bottom:1px solid var(--border);
+  color:var(--muted2);line-height:1.5;
+}
+.tbl tr:hover td{background:var(--s2);color:var(--text);}
+
+.tag{
+  display:inline-block;
+  padding:0.15rem 0.5rem;
+  border-radius:4px;
+  font-size:0.7rem;font-weight:700;
+  font-family:'DM Mono',monospace;
+}
+.tag-grid{background:rgba(90,133,181,0.15);color:var(--blue);}
+.tag-flex{background:rgba(77,153,102,0.15);color:var(--green);}
+.tag-js{background:rgba(232,184,109,0.15);color:var(--accent);}
+.tag-css{background:rgba(139,107,191,0.15);color:var(--purple);}
+
+p.info{
+  font-size:0.82rem;color:var(--muted2);
+  line-height:1.65;margin:0.5rem 0;
+}
+strong{color:var(--text);font-weight:600;}
+
+ul.dot-list{
+  list-style:none;padding:0;
+}
+ul.dot-list li{
+  padding:0.35rem 0;
+  font-size:0.82rem;color:var(--muted2);
+  line-height:1.5;
+  padding-left:1rem;position:relative;
+}
+ul.dot-list li::before{
+  content:'→';
+  position:absolute;left:0;
+  color:var(--accent);font-size:0.7rem;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <button class="nav-btn active" onclick="showSection('accueil',this)">Accueil</button>
+  <button class="nav-btn" onclick="showSection('responsive',this)">Responsive</button>
+  <button class="nav-btn" onclick="showSection('grid',this)">CSS Grid</button>
+  <button class="nav-btn" onclick="showSection('js',this)">JavaScript</button>
+  <button class="nav-btn" onclick="showSection('tds',this)">TDs / TP</button>
+  <button class="nav-btn" onclick="showSection('flashcards',this)">Flashcards</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">R212 — Intégration Web · Examen demain</div>
+  <h1>Responsive, Grid CSS<br>& JavaScript</h1>
+  <p>L'essentiel condensé : médias queries, CSS Grid, JS DOM, TP calculatrice et quiz.</p>
+</div>
+
+<!-- ======= ACCUEIL ======= -->
+<section class="section active" id="accueil">
+  <div class="section-title">Vue d'ensemble</div>
+  <div class="section-sub">3 grands thèmes — clique sur un onglet pour le détail.</div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-label">Thème 1</div>
+      <h3>Responsive & Media Queries</h3>
+      <p>Adapter le site à toutes les résolutions via <code>@media</code>. Mobile First. Viewport. Breakpoints.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Thème 2</div>
+      <h3>CSS Grid Layout</h3>
+      <p>Grille bidimensionnelle. <code>grid-template-columns</code>, <code>fr</code>, <code>repeat()</code>, <code>minmax()</code>, placement des zones.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Thème 3</div>
+      <h3>JavaScript DOM</h3>
+      <p>Sélecteurs, événements, manipulation du HTML, <code>data-*</code>, fonctions, tableaux JSON, boucles.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">TP</div>
+      <h3>Calculatrice</h3>
+      <p>Grid 4×6, <code>data-number</code>, <code>data-operation</code>, <code>addEventListener</code>, <code>innerText</code>.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">TP</div>
+      <h3>Quiz interactif</h3>
+      <p>Tableau JSON de questions, <code>classList</code>, <code>createElement</code>, <code>dataset</code>, gestion de l'index courant.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">TD</div>
+      <h3>Monopoly Grid</h3>
+      <p>Grille 5×5, <code>nth-child()</code>, <code>grid-row</code> / <code>grid-column</code>, centrage Flexbox.</p>
+    </div>
+  </div>
+
+  <table class="tbl">
+    <thead><tr><th>Propriété</th><th>Flexbox</th><th>Grid</th></tr></thead>
+    <tbody>
+      <tr><td>Dimensions</td><td>1D (ligne ou colonne)</td><td>2D (lignes ET colonnes)</td></tr>
+      <tr><td>Cas d'usage</td><td>Galerie, menu, boutons alignés</td><td>Layout complet, page complexe</td></tr>
+      <tr><td>Conteneur</td><td><code>display:flex</code></td><td><code>display:grid</code></td></tr>
+      <tr><td>Alignement</td><td>justify-content / align-items</td><td>idem + grid-area</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ======= RESPONSIVE ======= -->
+<section class="section" id="responsive">
+  <div class="section-title">Responsive & Media Queries</div>
+  <div class="section-sub">Adapter l'affichage selon la taille d'écran.</div>
+
+  <div class="fiche open">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">C'est quoi le responsive ?</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <p class="info">Adapter le design du site à la taille de l'écran de l'utilisateur. On distingue <strong>Mobile, Tablette, PC, TV</strong>.</p>
+      <p class="info"><strong>Mobile First</strong> : on développe d'abord pour le mobile (le plus contraignant), puis on enrichit pour les grands écrans.</p>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Breakpoints principaux</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <table class="tbl">
+        <thead><tr><th>Résolution</th><th>Cible</th></tr></thead>
+        <tbody>
+          <tr><td>&lt; 480 / 576px</td><td>Mobile</td></tr>
+          <tr><td>≥ 768px</td><td>Tablette</td></tr>
+          <tr><td>≥ 960px</td><td>Desktop</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Syntaxe @media</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">@media screen and (max-width: 576px) {
+  /* styles mobile */
+}
+
+@media screen and (min-width: 576px) {
+  /* styles tablette */
+}
+
+@media screen and (min-width: 960px) {
+  /* styles desktop */
+}</div>
+      <p class="info"><strong>max-width</strong> = "jusqu'à cette taille". <strong>min-width</strong> = "à partir de cette taille".</p>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Le viewport — balise meta indispensable</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <p class="info">Les mobiles dézooment par défaut pour afficher le site. Sans la balise viewport, tes media queries ne fonctionneront pas sur mobile.</p>
+      <div class="code-block">&lt;meta name="viewport" content="width=device-width"&gt;</div>
+      <p class="info">Le <strong>CSS pixel ratio</strong> : un pixel CSS ≠ un pixel physique. Un iPhone Retina a un ratio de 2 (640px physiques = 320px CSS).</p>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Règles @media disponibles</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <ul class="dot-list">
+        <li><strong>width / height</strong> — largeur/hauteur du viewport</li>
+        <li><strong>orientation</strong> — portrait ou landscape</li>
+        <li><strong>media screen / print</strong> — type d'affichage</li>
+        <li><strong>prefers-color-scheme</strong> — mode clair/sombre</li>
+        <li><strong>device-width / device-height</strong> — dimensions physiques</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======= GRID ======= -->
+<section class="section" id="grid">
+  <div class="section-title">CSS Grid Layout</div>
+  <div class="section-sub">Mise en page bidimensionnelle. Conteneur + enfants.</div>
+
+  <div class="fiche open">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Activer la grille</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">.conteneur {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;   /* 3 colonnes égales */
+  grid-template-rows: 100px 100px;       /* 2 lignes de 100px */
+  gap: 16px;                             /* gouttière */
+}</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">L'unité fr et repeat()</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <p class="info"><strong>fr</strong> = fraction de l'espace disponible.</p>
+      <div class="code-block">/* 3 colonnes égales */
+grid-template-columns: 1fr 1fr 1fr;
+/* Raccourci avec repeat() */
+grid-template-columns: repeat(3, 1fr);
+
+/* Mix : colonne fixe + flexible */
+grid-template-columns: 200px repeat(3, 1fr);
+
+/* Auto-remplissage responsive */
+grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">minmax() — taille min et max</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">/* Colonne entre 100px et 300px */
+grid-template-columns: minmax(100px, 300px);
+
+/* Ligne : min 120px, s'adapte au contenu */
+grid-template-rows: minmax(120px, auto);</div>
+      <p class="info">Utilisé dans le TP calculatrice pour l'écran d'affichage : <code>minmax(120px, auto)</code>.</p>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Placer les éléments — span, grid-column, grid-row</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">/* Occuper 2 colonnes d'affilée */
+.mon-element { grid-column: span 2; }
+
+/* Occuper 4 colonnes : calculatrice display */
+.display { grid-column: span 4; }
+
+/* Placement précis */
+.element {
+  grid-column: 1 / 3;  /* de la ligne 1 à 3 */
+  grid-row: 2 / 4;
+}
+
+/* nth-child — sélectionner le 5e élément */
+li:nth-child(5) { grid-column: 2 / 4; }</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Gouttières (gap)</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">gap: 16px;              /* lignes et colonnes */
+row-gap: 10px;          /* entre les lignes seulement */
+column-gap: 20px;       /* entre les colonnes seulement */</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Zones nommées — grid-area</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">/* Sur le conteneur */
+.conteneur {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "section aside"
+    "footer footer";
+}
+
+/* Sur chaque enfant */
+header  { grid-area: header; }
+section { grid-area: section; }
+aside   { grid-area: aside; }
+footer  { grid-area: footer; }</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Alignement dans la grille</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <table class="tbl">
+        <thead><tr><th>Propriété</th><th>S'applique à</th><th>Effet</th></tr></thead>
+        <tbody>
+          <tr><td><code>justify-items</code></td><td>conteneur</td><td>alignement horizontal des enfants</td></tr>
+          <tr><td><code>align-items</code></td><td>conteneur</td><td>alignement vertical des enfants</td></tr>
+          <tr><td><code>justify-content</code></td><td>conteneur</td><td>distribution horizontale de la grille</td></tr>
+          <tr><td><code>align-content</code></td><td>conteneur</td><td>distribution verticale de la grille</td></tr>
+          <tr><td><code>justify-self</code></td><td>enfant</td><td>alignement horizontal d'un enfant</td></tr>
+          <tr><td><code>align-self</code></td><td>enfant</td><td>alignement vertical d'un enfant</td></tr>
+        </tbody>
+      </table>
+      <div class="code-block">/* Centrer dans une cellule = Flexbox sur l'enfant */
+.cellule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">TP Calculatrice — structure Grid</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <p class="info">Grille <strong>4 colonnes × 6 lignes</strong>. Colonnes et lignes de 100px. Affichage : <code>minmax(120px, auto)</code>.</p>
+      <div class="code-block">#calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+  gap: 4px;
+}
+
+/* L'affichage prend toute la largeur */
+.display {
+  grid-column: span 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* texte à droite */
+}
+
+/* Touche AC et = : span 2 */
+.span-two { grid-column: span 2; }</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= JAVASCRIPT ======= -->
+<section class="section" id="js">
+  <div class="section-title">JavaScript — DOM & Events</div>
+  <div class="section-sub">Variables, fonctions, sélecteurs, événements, JSON.</div>
+
+  <div class="fiche open">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Variables et constantes</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">const nom = "Mario";   // ne change jamais
+let age = 39;          // peut changer
+
+console.log(nom + " a " + age + " ans");
+// → Mario a 39 ans</div>
+      <ul class="dot-list">
+        <li>Commence par une lettre ou <code>_</code>, pas de chiffre ni caractère spécial</li>
+        <li>camelCase pour les variables : <code>nomDeLaVariable</code></li>
+        <li>SCREAMING_SNAKE_CASE pour les constantes importantes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Sélecteurs DOM</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">// Par ID → un seul élément
+const btn = document.getElementById('mon-btn');
+
+// Par classe → plusieurs éléments
+const items = document.getElementsByClassName('item');
+
+// Par sélecteur CSS → un seul
+const el = document.querySelector('.ma-classe');
+const el2 = document.querySelector('[data-output]');
+
+// Par sélecteur CSS → tous
+const tous = document.querySelectorAll('[data-number]');</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">data-* — attributs de données</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">/* HTML */
+&lt;button data-number&gt;1&lt;/button&gt;
+&lt;div data-output&gt;&lt;/div&gt;
+&lt;button data-correct="true"&gt;Bonne réponse&lt;/button&gt;
+
+/* JS — sélectionner par data-* */
+const nums = document.querySelectorAll('[data-number]');
+const output = document.querySelector('[data-output]');
+
+/* Lire/écrire une valeur data-* */
+button.dataset.correct     // lire
+button.dataset.correct = true; // écrire</div>
+      <p class="info">Préféré aux classes CSS pour les rôles fonctionnels. Ne mélange pas sémantique CSS et sémantique JS.</p>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">addEventListener & events</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">const btn = document.querySelector('#mon-btn');
+
+// Syntaxe basique
+btn.addEventListener('click', function() {
+  console.log('cliqué');
+});
+
+// Avec arrow function
+btn.addEventListener('click', () => {
+  console.log('cliqué');
+});
+
+// Avec l'événement (e) pour récupérer la cible
+btn.addEventListener('click', (e) => {
+  const cible = e.target;        // l'élément cliqué
+  console.log(cible.innerText);  // son texte
+});</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">Modifier le HTML : innerText, innerHTML, classList</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">const el = document.querySelector('#monEl');
+
+// Lire ou modifier le texte visible
+el.innerText = 'nouveau texte';
+const texte = el.innerText;
+
+// Modifier le HTML interne (dangereux avec données utilisateur)
+el.innerHTML = '&lt;strong&gt;gras&lt;/strong&gt;';
+el.innerHTML = '';   // vider
+
+// Classes
+el.classList.add('hide');
+el.classList.remove('hide');
+el.classList.toggle('active');
+
+// Créer un élément et l'ajouter
+const btn = document.createElement('button');
+btn.innerText = 'Cliquez';
+btn.classList.add('btn');
+conteneur.appendChild(btn);</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">forEach — parcourir un NodeList ou tableau</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">const boutons = document.querySelectorAll('[data-number]');
+
+boutons.forEach(button => {
+  button.addEventListener('click', () => {
+    console.log(button.innerText);
+  });
+});
+
+// Array.from() — convertir HTMLCollection en tableau
+Array.from(conteneur.children).forEach(enfant => {
+  // traitement
+});</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">JSON — tableau d'objets</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">const questions = [
+  {
+    enonce: 'Quel est le langage du web côté client ?',
+    reponses: [
+      { texte: 'Python', correcte: false },
+      { texte: 'JavaScript', correcte: true }
+    ]
+  },
+  {
+    enonce: 'Que signifie CSS ?',
+    reponses: [
+      { texte: 'Cascading Style Sheets', correcte: true },
+      { texte: 'Computer Style System', correcte: false }
+    ]
+  }
+];
+
+// Accéder aux données
+questions[0].enonce         // première question
+questions[0].reponses[1].texte  // 'JavaScript'</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">TP Calculatrice — logique JS complète</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">/* Sélecteurs */
+const output = document.querySelector('[data-output]');
+const clearButton = document.querySelector('[data-all-clear]');
+const numberButtons = document.querySelectorAll('[data-number]');
+
+/* Effacer */
+function clear() {
+  output.innerText = '';
+}
+clearButton.addEventListener('click', () => { clear(); });
+
+/* Afficher un chiffre */
+function appendNumber(number) {
+  output.innerText = output.innerText + number;
+}
+numberButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    appendNumber(button.innerText);
+  });
+});</div>
+      <p class="info">Rôles à attribuer : <code>data-output</code>, <code>data-number</code>, <code>data-operation</code>, <code>data-equals</code>, <code>data-all-clear</code>.</p>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">TP Quiz — logique JS complète</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">let currentQuestionIndex = 0;
+
+function startGame() {
+  currentQuestionIndex = 0;
+  startButton.classList.add('hide');
+  questionContainer.classList.remove('hide');
+  setNextQuestion();
+}
+
+function setNextQuestion() {
+  resetState();
+  showQuestion(questions[currentQuestionIndex]);
+}
+
+function showQuestion(question) {
+  questionElement.innerText = question.enonce;
+  question.reponses.forEach(reponse => {
+    let btn = document.createElement('button');
+    btn.innerText = reponse.texte;
+    btn.classList.add('btn');
+    if (reponse.correcte) btn.dataset.correct = true;
+    btn.addEventListener('click', selectAnswer);
+    answerButtonsElement.appendChild(btn);
+  });
+}
+
+function selectAnswer(e) {
+  const selectedButton = e.target;
+  const isCorrect = selectedButton.dataset.correct;
+  setStatusClass(document.body, isCorrect);
+  Array.from(answerButtonsElement.children).forEach(button => {
+    setStatusClass(button, button.dataset.correct);
+  });
+  if (questions.length > currentQuestionIndex + 1) {
+    nextButton.classList.remove('hide');
+  } else {
+    startButton.innerText = 'Recommencer';
+    startButton.classList.remove('hide');
+  }
+}
+
+function setStatusClass(element, isCorrect) {
+  element.classList.remove('correct', 'wrong');
+  element.classList.add(isCorrect ? 'correct' : 'wrong');
+}
+
+function resetState() {
+  answerButtonsElement.innerHTML = '';
+  nextButton.classList.add('hide');
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= TDs ======= -->
+<section class="section" id="tds">
+  <div class="section-title">TDs & TP — Rappels clés</div>
+  <div class="section-sub">Tout ce qu'on peut te demander en pratique.</div>
+
+  <div class="fiche open">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">TD1 — Monopoly (Grid 5×5)</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">ol {
+  display: grid;
+  grid-template-columns: repeat(5, 100px);
+  grid-template-rows: repeat(5, 100px);
+  gap: 4px;
+  list-style: none;
+}
+
+li { border: 1px solid #333; }
+
+/* Placer le 1er élément colonne 3, lignes 1 à 3 */
+li:nth-child(1) {
+  grid-column: 3;
+  grid-row: 1 / 3;
+}
+
+/* Centrer le contenu dans chaque case */
+li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">TD1 — Centrage Flexbox (vertical + horizontal)</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">/* Le parent doit occuper tout l'espace */
+.wrapper {
+  display: flex;
+  justify-content: center;   /* horizontal */
+  align-items: center;       /* vertical */
+  min-height: 100vh;         /* pleine hauteur */
+}
+
+/* Pour centrer aussi le contenu à l'intérieur du bloc */
+.bloc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">TD2 — JS : prompt, alert, formulaire</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <div class="code-block">/* Ex1 : saluer l'utilisateur */
+const prenom = prompt('Quel est ton prénom ?');
+alert('Bonjour ' + prenom + ' !');
+
+/* Ex2 : calculer une aire */
+function calculerAire(longueur, largeur) {
+  const aire = longueur * largeur;
+  console.log('L\'aire de ' + longueur + ' m x ' + largeur + ' m = ' + aire + ' m²');
+}
+calculerAire(5, 3);
+
+/* Ex3 : aire depuis un formulaire */
+const btnCalcul = document.getElementById('btn-calcul');
+btnCalcul.addEventListener('click', () => {
+  const l = document.getElementById('longueur').value;
+  const w = document.getElementById('largeur').value;
+  calculerAire(Number(l), Number(w));
+});
+
+/* Bonus : afficher dans le HTML */
+document.getElementById('resultat').textContent = 'Résultat : ' + aire + ' m²';</div>
+    </div>
+  </div>
+
+  <div class="fiche">
+    <div class="fiche-header" onclick="toggleFiche(this)">
+      <span class="fiche-title">TP site sportif — Grid responsive</span>
+      <span class="fiche-toggle">+</span>
+    </div>
+    <div class="fiche-body">
+      <p class="info">Approche Mobile First : pas de grid pour mobile, grid pour tablette+, grid complète pour desktop.</p>
+      <div class="code-block">/* Mobile : flux normal, pas de grid */
+.articles {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tablette : 2 colonnes */
+@media screen and (min-width: 480px) {
+  .articles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+/* Desktop : 3 colonnes */
+@media screen and (min-width: 960px) {
+  .articles {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .page {
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "nav nav"
+      "main aside"
+      "footer footer";
+  }
+}</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= FLASHCARDS ======= -->
+<section class="section" id="flashcards">
+  <div class="section-title">Flashcards</div>
+  <div class="section-sub">Clique pour retourner. Navigue avec les boutons.</div>
+
+  <div class="fc-container">
+    <div class="fc-meta">
+      <span class="fc-counter" id="fc-counter">1 / 30</span>
+      <div class="fc-cats">
+        <button class="fc-cat" onclick="filterCat('all',this)">Tout</button>
+        <button class="fc-cat active" onclick="filterCat('examen',this)">⚡ Examen</button>
+        <button class="fc-cat" onclick="filterCat('responsive',this)">Responsive</button>
+        <button class="fc-cat" onclick="filterCat('grid',this)">Grid</button>
+        <button class="fc-cat" onclick="filterCat('js',this)">JavaScript</button>
+        <button class="fc-cat" onclick="filterCat('tp',this)">TPs</button>
+      </div>
+    </div>
+
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="fc-inner">
+        <div class="fc-front">
+          <div class="fc-side-label">Question</div>
+          <div class="fc-question" id="fc-question">Chargement...</div>
+          <div class="fc-hint">Clique pour voir la réponse</div>
+        </div>
+        <div class="fc-back">
+          <div class="fc-side-label">Réponse</div>
+          <div class="fc-answer" id="fc-answer"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-controls">
+      <button class="fc-btn prev" onclick="prevCard()">← Préc.</button>
+      <button class="fc-btn next" onclick="nextCard()">Suiv. →</button>
+    </div>
+
+    <div class="fc-progress">
+      <div class="fc-progress-fill" id="fc-progress-fill"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ─── NAVIGATION ───────────────────────────────────────
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ─── FICHES ACCORDÉON ─────────────────────────────────
+function toggleFiche(header) {
+  const fiche = header.parentElement;
+  fiche.classList.toggle('open');
+}
+
+// ─── FLASHCARDS DATA ──────────────────────────────────
+const ALL_CARDS = [
+
+  // ══ EXAMEN — L'essentiel à connaître par cœur ══
+  {cat:'examen', q:"C'est quoi le responsive web design ?", a:"Adapter le design d'un site à toutes les tailles d'écran (mobile, tablette, desktop) grâce aux media queries CSS."},
+  {cat:'examen', q:"Balise meta OBLIGATOIRE pour que le responsive fonctionne sur mobile ?", a:'<code>&lt;meta name="viewport" content="width=device-width"&gt;</code>\nSans elle, le navigateur mobile dézoome et ignore tes media queries.'},
+  {cat:'examen', q:"Syntaxe d'une media query mobile (max 576px) ?", a:'<code>@media screen and (max-width: 576px) {\n  /* styles mobile */\n}</code>'},
+  {cat:'examen', q:"Syntaxe d'une media query desktop (min 960px) ?", a:'<code>@media screen and (min-width: 960px) {\n  /* styles desktop */\n}</code>'},
+  {cat:'examen', q:"Breakpoints du cours : mobile / tablette / desktop ?", a:"Mobile : &lt; 480–576px\nTablette : ≥ 768px\nDesktop : ≥ 960px"},
+  {cat:'examen', q:"C'est quoi le Mobile First ?", a:"On code d'abord pour mobile (sans media query), puis on enrichit pour les grands écrans avec des <code>min-width</code>."},
+  {cat:'examen', q:"Comment activer CSS Grid sur un conteneur ?", a:'<code>display: grid;</code>'},
+  {cat:'examen', q:"Que veut dire l'unité fr ?", a:"Fraction de l'espace disponible dans la grille.\n<code>1fr 2fr</code> → le 2e prend 2× plus de place que le 1er."},
+  {cat:'examen', q:"Comment créer 4 colonnes égales de 100px avec repeat() ?", a:'<code>grid-template-columns: repeat(4, 100px);</code>'},
+  {cat:'examen', q:"Comment créer une grille responsive sans media query ?", a:'<code>grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));</code>'},
+  {cat:'examen', q:"À quoi sert minmax(120px, auto) ?", a:"Taille minimum 120px, s'étire automatiquement selon le contenu. Utilisé pour l'affichage de la calculatrice."},
+  {cat:'examen', q:"Comment faire qu'un élément occupe 2 colonnes ?", a:'<code>grid-column: span 2;</code>'},
+  {cat:'examen', q:"Comment placer un élément de la colonne 1 à 3 ?", a:'<code>grid-column: 1 / 3;</code>'},
+  {cat:'examen', q:"Comment ajouter une gouttière de 8px dans une grid ?", a:'<code>gap: 8px;</code>\nOu séparément : <code>row-gap</code> / <code>column-gap</code>.'},
+  {cat:'examen', q:"Comment centrer verticalement ET horizontalement dans une cellule ?", a:'<code>display: flex;\njustify-content: center;\nalign-items: center;</code>'},
+  {cat:'examen', q:"Flexbox vs Grid : quelle différence fondamentale ?", a:"Flexbox = 1 dimension (ligne OU colonne).\nGrid = 2 dimensions (lignes ET colonnes simultanément)."},
+  {cat:'examen', q:"Comment nommer des zones de grille avec grid-area ?", a:'Sur le conteneur :\n<code>grid-template-areas: "header header" "main aside";</code>\nSur chaque enfant : <code>grid-area: header;</code>'},
+  {cat:'examen', q:"Comment sélectionner le 3e élément d'une liste en CSS ?", a:'<code>li:nth-child(3) { ... }</code>'},
+  {cat:'examen', q:"const vs let en JavaScript ?", a:"<code>const</code> → valeur fixe, ne peut pas être réassignée.\n<code>let</code> → variable, peut changer."},
+  {cat:'examen', q:"Comment sélectionner UN élément par son attribut data-output ?", a:'<code>document.querySelector(\'[data-output]\')</code>'},
+  {cat:'examen', q:"Comment sélectionner TOUS les [data-number] ?", a:'<code>document.querySelectorAll(\'[data-number]\')</code>\n→ retourne un NodeList, parcourable avec forEach.'},
+  {cat:'examen', q:"Comment écouter un clic sur un bouton ?", a:'<code>btn.addEventListener(\'click\', () => {\n  // action\n});</code>'},
+  {cat:'examen', q:"Comment modifier le texte visible d'un élément en JS ?", a:'Écrire : <code>element.innerText = \'nouveau texte\';</code>\nLire : <code>const texte = element.innerText;</code>'},
+  {cat:'examen', q:"Comment ajouter / supprimer une classe CSS en JS ?", a:'<code>el.classList.add(\'hide\');\nel.classList.remove(\'hide\');\nel.classList.toggle(\'active\');</code>'},
+  {cat:'examen', q:"Pourquoi utiliser defer sur la balise script ?", a:'<code>&lt;script src="main.js" defer&gt;&lt;/script&gt;</code>\nLe script se lance APRÈS le chargement du HTML, évitant les erreurs sur des éléments non encore présents.'},
+  {cat:'examen', q:"C'est quoi data-* et pourquoi l'utiliser à la place des classes ?", a:"<code>data-*</code> sert à porter des rôles/données fonctionnelles (JS).\nLes classes CSS servent au style.\n→ On ne mélange pas les deux."},
+  {cat:'examen', q:"Comment lire / écrire un dataset en JS ?", a:'HTML : <code>data-correct="true"</code>\nLire : <code>button.dataset.correct</code>\nÉcrire : <code>button.dataset.correct = true</code>'},
+  {cat:'examen', q:"Comment créer un élément HTML dynamiquement en JS ?", a:'<code>const btn = document.createElement(\'button\');\nbtn.innerText = \'Cliquer\';\nbtn.classList.add(\'btn\');\nconteneur.appendChild(btn);</code>'},
+  {cat:'examen', q:"Comment vider le contenu HTML d'un élément ?", a:'<code>element.innerHTML = \'\';</code>'},
+  {cat:'examen', q:"Structure d'un tableau JSON de questions pour le TP quiz ?", a:'<code>[{\n  enonce: \'Question ?\',\n  reponses: [\n    { texte: \'Bonne\', correcte: true },\n    { texte: \'Fausse\', correcte: false }\n  ]\n}]</code>'},
+  {cat:'examen', q:"Comment parcourir un NodeList avec forEach ?", a:'<code>const btns = document.querySelectorAll(\'[data-number]\');\nbtns.forEach(btn => {\n  btn.addEventListener(\'click\', () => { ... });\n});</code>'},
+  {cat:'examen', q:"Que fait Array.from(el.children) ?", a:"Convertit une HTMLCollection (non itérable directement) en tableau JS standard, utilisable avec <code>forEach</code>."},
+  {cat:'examen', q:"TP Calculatrice : grille de combien de colonnes et lignes ?", a:"4 colonnes × 6 lignes.\nColonnes et lignes : 100px.\nAffichage (ligne 1) : <code>minmax(120px, auto)</code>."},
+  {cat:'examen', q:"TP Calculatrice : quels sont les 5 data-* à attribuer ?", a:"<code>data-output</code> → écran\n<code>data-number</code> → 0–9 et point\n<code>data-operation</code> → +, −, ×, ÷\n<code>data-equals</code> → =\n<code>data-all-clear</code> → AC"},
+  {cat:'examen', q:"TP Quiz : comment afficher la bonne couleur sur les boutons au clic ?", a:'<code>function setStatusClass(el, isCorrect) {\n  el.classList.remove(\'correct\', \'wrong\');\n  el.classList.add(isCorrect ? \'correct\' : \'wrong\');\n}</code>'},
+
+  // ESSENTIELS MANQUANTS
+  {cat:'examen', q:"Comment activer Flexbox et aligner des éléments sur une ligne avec retour ?", a:'<code>display: flex;\nflex-wrap: wrap;\njustify-content: center; /* horizontal */\nalign-items: center;     /* vertical */</code>'},
+  {cat:'examen', q:"Flexbox : que fait flex-direction: column ?", a:"Les éléments s'empilent verticalement au lieu d'être côte à côte."},
+  {cat:'examen', q:"Analyse Decathlon : comment 3 articles par ligne devient 1 en mobile ?", a:"Conteneur en <code>display: flex; flex-wrap: wrap;</code>, chaque article à <code>width: 33%</code>.\nMedia query mobile → <code>width: 100%</code> → les articles s'empilent."},
+  {cat:'examen', q:"Comment récupérer la valeur d'un champ input en JS ?", a:'<code>const val = document.getElementById(\'mon-input\').value;</code>\nToujours une string → convertir avec <code>Number(val)</code> si calcul numérique.'},
+  {cat:'examen', q:"textContent vs innerText ?", a:"<code>textContent</code> → tout le texte brut du nœud.\n<code>innerText</code> → texte visible uniquement (respecte le CSS).\nPour afficher un résultat dans le HTML : les deux marchent."},
+  {cat:'examen', q:"Comment demander une saisie et afficher une alerte ?", a:'<code>const prenom = prompt(\'Ton prénom ?\');\nalert(\'Bonjour \' + prenom);</code>'},
+
+  // RESPONSIVE (détail)
+  {cat:'responsive', q:"Qu'est-ce que le Mobile First ?", a:"On développe d'abord pour mobile (le plus contraignant), puis on enrichit pour les grands écrans via des <code>min-width</code>."},
+  {cat:'responsive', q:"Quelle balise meta est indispensable pour le responsive mobile ?", a:'<code>&lt;meta name="viewport" content="width=device-width"&gt;</code>\nSans elle, le navigateur mobile dézoome et les media queries ne fonctionnent pas.'},
+  {cat:'responsive', q:"Quelle est la différence entre max-width et min-width dans @media ?", a:"<code>max-width</code> = 'jusqu'à cette taille' (style mobile).\n<code>min-width</code> = 'à partir de cette taille' (style tablette/desktop)."},
+  {cat:'responsive', q:"Cite les 3 principaux breakpoints du cours.", a:"480/576px → Mobile\n768px → Tablette\n960px → Desktop"},
+  {cat:'responsive', q:"Pourquoi 1 pixel CSS ≠ 1 pixel physique sur mobile ?", a:"Les écrans Retina ont un devicePixelRatio de 2 : 640px physiques = 320px CSS."},
+  {cat:'responsive', q:"Quelle valeur @media détecte le mode sombre ?", a:"<code>@media (prefers-color-scheme: dark)</code>"},
+  
+  // GRID (détail)
+  {cat:'grid', q:"Quelle propriété active CSS Grid sur un conteneur ?", a:"<code>display: grid;</code>"},
+  {cat:'grid', q:"Que représente l'unité fr dans CSS Grid ?", a:"Une fraction de l'espace disponible. <code>1fr 2fr</code> = 1/3 et 2/3."},
+  {cat:'grid', q:"Comment créer 3 colonnes égales avec repeat() ?", a:"<code>grid-template-columns: repeat(3, 1fr);</code>"},
+  {cat:'grid', q:"Comment rendre une grille responsive sans media query ?", a:"<code>grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));</code>"},
+  {cat:'grid', q:"À quoi sert minmax() ?", a:"Taille min et max. <code>minmax(120px, auto)</code> = au moins 120px, s'adapte au contenu."},
+  {cat:'grid', q:"Comment faire occuper 2 colonnes à un élément ?", a:"<code>grid-column: span 2;</code>"},
+  {cat:'grid', q:"Comment placer un élément de la colonne 1 à 3 ?", a:"<code>grid-column: 1 / 3;</code>"},
+  {cat:'grid', q:"Comment sélectionner le 5e enfant d'une liste en CSS ?", a:"<code>li:nth-child(5) { ... }</code>"},
+  {cat:'grid', q:"Quelle différence entre Flexbox et Grid ?", a:"Flexbox = 1D. Grid = 2D. Flexbox pour nav/galerie, Grid pour layout de page."},
+  {cat:'grid', q:"Comment nommer des zones dans Grid ?", a:'<code>grid-template-areas: "header header" "main aside";</code>\npuis : <code>grid-area: header;</code>'},
+  {cat:'grid', q:"Comment centrer dans une cellule Grid ?", a:"<code>display:flex; justify-content:center; align-items:center;</code>"},
+  {cat:'grid', q:"Comment définir une gouttière ?", a:"<code>gap: 16px;</code>"},
+  
+  // JS (détail)
+  {cat:'js', q:"Quelle est la différence entre let et const ?", a:"<code>const</code> : valeur fixe.\n<code>let</code> : variable, peut être réassignée."},
+  {cat:'js', q:"Comment sélectionner tous les [data-number] ?", a:"<code>document.querySelectorAll('[data-number]')</code>"},
+  {cat:'js', q:"Pourquoi préférer data-* aux classes pour les rôles JS ?", a:"Séparation des responsabilités : classes = style, data-* = données/rôles fonctionnels."},
+  {cat:'js', q:"Comment parcourir un NodeList ?", a:"<code>boutons.forEach(button => { ... });</code>"},
+  {cat:'js', q:"Comment modifier le texte d'un élément ?", a:"<code>element.innerText = 'nouveau texte';</code>"},
+  {cat:'js', q:"Comment ajouter / retirer une classe CSS en JS ?", a:"<code>el.classList.add('hide');\nel.classList.remove('hide');</code>"},
+  {cat:'js', q:"Pourquoi utiliser defer sur la balise script ?", a:"Lance le script après le chargement complet du DOM."},
+  {cat:'js', q:"Structure d'un tableau JSON d'objets ?", a:"<code>[{ cle: valeur }, { cle: valeur }]</code>"},
+  
+  // TP (détail)
+  {cat:'tp', q:"TP calculatrice : data-* à attribuer ?", a:"<code>data-output</code>, <code>data-number</code>, <code>data-operation</code>, <code>data-equals</code>, <code>data-all-clear</code>"},
+  {cat:'tp', q:"TP quiz : comment créer dynamiquement un bouton réponse ?", a:"<code>let btn = document.createElement('button');\nbtn.innerText = reponse.texte;\nbtn.classList.add('btn');\nif (reponse.correcte) btn.dataset.correct = true;\nconteneur.appendChild(btn);</code>"},
+  {cat:'tp', q:"TP quiz : que fait Array.from(el.children) ?", a:"Convertit une HTMLCollection en tableau JS standard, utilisable avec forEach."},
+];
+
+let currentDeck = ALL_CARDS.filter(c => c.cat === 'examen');
+let currentIdx = 0;
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.fc-cat').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentDeck = cat === 'all' ? [...ALL_CARDS] : ALL_CARDS.filter(c => c.cat === cat);
+  currentIdx = 0;
+  renderCard();
+}
+
+function renderCard() {
+  const card = currentDeck[currentIdx];
+  document.getElementById('fc-question').textContent = card.q;
+  document.getElementById('fc-answer').innerHTML = card.a.replace(/\n/g,'<br>');
+  document.getElementById('fc-counter').textContent = (currentIdx+1) + ' / ' + currentDeck.length;
+  const pct = ((currentIdx+1)/currentDeck.length*100).toFixed(0);
+  document.getElementById('fc-progress-fill').style.width = pct + '%';
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+
+function flipCard() {
+  document.getElementById('flashcard').classList.toggle('flipped');
+}
+
+function nextCard() {
+  currentIdx = (currentIdx + 1) % currentDeck.length;
+  renderCard();
+}
+
+function prevCard() {
+  currentIdx = (currentIdx - 1 + currentDeck.length) % currentDeck.length;
+  renderCard();
+}
+
+// Init sur la catégorie examen
+renderCard();
+</script>
+</body>
+</html>
